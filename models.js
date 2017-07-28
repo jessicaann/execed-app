@@ -122,7 +122,7 @@ sessionSchema.methods.apiRepr = function(){
     return {
         id: this.id,
         title: this.title,
-        instructors: this.instructors,
+        instructor: this.instructor,
         date: this.date,
         startTime: this.startTime,
         endTime: this.endTime,
