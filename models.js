@@ -109,13 +109,12 @@ const sessionSchema = mongoose.Schema({
         type: [{}],
         default: undefined
     },
-    date: {type: Date},
-    startTime: {type: Date}, //since Date type can store time, is this the right way to store it?
+    startTime: {type: Date},
     endTime: {type: Date},
-    preWork: {
-        type: [],
-        default: undefined
-    }
+    preWork: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'FileModel',
+    }]
 });
 //Session API Reveal
 sessionSchema.methods.apiRepr = function(){
@@ -123,18 +122,17 @@ sessionSchema.methods.apiRepr = function(){
         id: this.id,
         title: this.title,
         instructor: this.instructor,
-        date: this.date,
         startTime: this.startTime,
         endTime: this.endTime,
         preWork: this.preWork
     };
 }
 
-const userModel = mongoose.model('userModel', userSchema);
-const adminModel = mongoose.model('adminModel', adminSchema);
-const fileModel = mongoose.model('fileModel', fileSchema);
-const instructorModel = mongoose.model('instructorModel', instructorSchema);
-const scheduleModel = mongoose.model('scheduleModel', scheduleSchema);
-const sessionModel = mongoose.model('sessionModel', sessionSchema);
+const UserModel = mongoose.model('User', userSchema); //<-- 'name' refers to collection in db
+const AdminModel = mongoose.model('Admin', adminSchema);
+const FileModel = mongoose.model('File', fileSchema);
+const InstructorModel = mongoose.model('Instructor', instructorSchema);
+const ScheduleModel = mongoose.model('Schedule', scheduleSchema);
+const SessionModel = mongoose.model('Session', sessionSchema);
 
-module.exports={userModel, adminModel, fileModel, instructorModel, scheduleModel, sessionModel};
+module.exports={UserModel, AdminModel, FileModel, InstructorModel, ScheduleModel, SessionModel};
