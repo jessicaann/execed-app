@@ -6,11 +6,11 @@ const userSchema = mongoose.Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    courses: {
-        type: [{}],
-        default: undefined,
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ScheduleModel',
         required: true
-    }
+    }]
 });
 //User API Reveal
 userSchema.methods.apiRepr = function() {

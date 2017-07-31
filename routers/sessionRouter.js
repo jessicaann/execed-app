@@ -4,40 +4,23 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {scheduleModel} = require('./models/schedule'); //Is schedule the name of the model?
+const {SessionModel} = require('../models/session');
 
-//Get all schedules
-router.get('/', (req, res) => {
-    scheduleModel
-        .find()
-        .exec()
-        .then(schedules => {
-            res.json({
-                schedules: schedules.map(
-                (schedule) => schedule.apiRepr())
-            });
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-      });
-});
 
-//Get individual schedules
+//Get individual sessions
 router.get('/:id', (req, res) => {
-    scheduleModel
+    SessionModel
         .findById(req.params.id)
         .exec()
-        .then(schedule => res.json(schedule.apiRepr()))
+        .then(session => res.json(session.apiRepr()))
         .catch(err => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})
     });
 });
-//Create new schedules
-router.post('/', (req, res) => {
-    const requiredFields = ['title','sessions', 'admin'];
+//Create new sessions
+router.post('/', jsonParser, (req, res) => {
+    const requiredFields = ['title', 'instructors', 'startTime', 'endTime', 'preWork'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -46,20 +29,22 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-    scheduleModel
+    SessionModel
     .create({
         title: req.body.title,
-        sessions: req.body.sessions,
-        admin: req.body.admin})
+        instructors: req.body.instructors,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
+        preWork: req.body.preWork})
     .then(
-    schedule => res.status(201).json(schedule.apiRepr()))
+    session => res.status(201).json(session.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});
     });
 });
-//Update schedule
-router.put('/:id', (req, res) => {
+//Update session
+router.put('/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -68,26 +53,26 @@ router.put('/:id', (req, res) => {
     res.status(400).json({message: message});
   }
     const toUpdate = {};
-    const updateablefields = ['title', 'sessions', 'admin'];
+    const updateablefields = ['title', 'instructor', 'startTime', 'endTime', 'preWork'];
     
     updateablefields.forEach(field => {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    scheduleModel
+    SessionModel
         .findByIdAndUpdate(req.params.id, {$set: toUpdate})
         .exec()
-        .then(schedule => res.status(204).end())
+        .then(session => res.status(200).json(toUpdate))
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-//Delete schedule
+//Delete session
 router.delete('/:id', (req, res) => {
-    scheduleModel
+    SessionModel
         .findByIdAndRemove(req.params.id)
         .exec()
-        .then(schedule => res.status(204).end())
+        .then(session => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 

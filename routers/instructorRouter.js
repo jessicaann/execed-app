@@ -4,11 +4,11 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {instructorModel} = require('./models/instructor'); //Is instructor the name of the model?
+const {InstructorModel} = require('../models/instructor'); //Is instructor the name of the model?
 
 //Get all instructors
 router.get('/', (req, res) => {
-    instructorModel
+    InstructorModel
         .find()
         .exec()
         .then(instructors => {
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 //Get individual instructors
 router.get('/:id', (req, res) => {
-    instructorModel
+    InstructorModel
         .findById(req.params.id)
         .exec()
         .then(instructor => res.json(instructor.apiRepr()))
@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
     });
 });
 //Create new instructors
-router.post('/', (req, res) => {
+router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['firstName', 'lastName', 'email'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-    instructorModel
+    InstructorModel
     .create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
     });
 });
 //Update instructor
-router.put('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -75,16 +75,16 @@ router.put('/:id', (req, res) => {
             toUpdate[field] = req.body[field];
         }
     });
-    instructorModel
+    InstructorModel
         .findByIdAndUpdate(req.params.id, {$set: toUpdate})
         .exec()
-        .then(instructor => res.status(204).end())
+        .then(instructor => res.status(200).json(toUpdate))
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 //Delete instructor
 router.delete('/:id', (req, res) => {
-    instructorModel
+    InstructorModel
         .findByIdAndRemove(req.params.id)
         .exec()
         .then(instructor => res.status(204).end())

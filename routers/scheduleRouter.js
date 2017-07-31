@@ -4,17 +4,17 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {fileModel} = require('./models/file'); //Is file the name of the model?
+const {ScheduleModel} = require('../models/schedule'); //Is schedule the name of the model?
 
-//Get all files
+//Get all schedules
 router.get('/', (req, res) => {
-    fileModel
+    ScheduleModel
         .find()
         .exec()
-        .then(files => {
+        .then(schedules => {
             res.json({
-                files: files.map(
-                (file) => file.apiRepr())
+                schedules: schedules.map(
+                (schedule) => schedule.apiRepr())
             });
     })
     .catch(
@@ -24,20 +24,20 @@ router.get('/', (req, res) => {
       });
 });
 
-//Get individual files
+//Get individual schedules
 router.get('/:id', (req, res) => {
-    fileModel
+    ScheduleModel
         .findById(req.params.id)
         .exec()
-        .then(file => res.json(file.apiRepr()))
+        .then(schedule => res.json(schedule.apiRepr()))
         .catch(err => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})
     });
 });
-//Create new files
-router.post('/', (req, res) => {
-    const requiredFields = ['title', 'author', 'yearPublished', 'file'];
+//Create new schedules
+router.post('/', jsonParser, (req, res) => {
+    const requiredFields = ['title','sessions', 'admin'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -46,21 +46,20 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-    fileModel
+    ScheduleModel
     .create({
         title: req.body.title,
-        author: req.body.author,
-        yearPublished: req.body.yearPublished,
-        file: req.body.file})
+        sessions: req.body.sessions,
+        admin: req.body.admin})
     .then(
-    file => res.status(201).json(file.apiRepr()))
+    schedule => res.status(201).json(schedule.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});
     });
 });
-//Update file
-router.put('/:id', (req, res) => {
+//Update schedule
+router.put('/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -69,26 +68,26 @@ router.put('/:id', (req, res) => {
     res.status(400).json({message: message});
   }
     const toUpdate = {};
-    const updateablefields = ['title', 'author', 'yearPublished', 'file'];
+    const updateablefields = ['title', 'sessions', 'admin'];
     
     updateablefields.forEach(field => {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    fileModel
+    ScheduleModel
         .findByIdAndUpdate(req.params.id, {$set: toUpdate})
         .exec()
-        .then(file => res.status(204).end())
+        .then(schedule => res.status(200).json(toUpdate))
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-//Delete file
+//Delete schedule
 router.delete('/:id', (req, res) => {
-    fileModel
+    ScheduleModel
         .findByIdAndRemove(req.params.id)
         .exec()
-        .then(file => res.status(204).end())
+        .then(schedule => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 

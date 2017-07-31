@@ -4,17 +4,17 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {adminModel} = require('./models/admin'); //Is Admin the name of the model?
+const {UserModel} = require('../models/user');
 
-//Get all admin accounts
+//Get all user accounts
 router.get('/', (req, res) => {
-    adminModel
+    UserModel
         .find()
         .exec()
-        .then(admins => {
+        .then(users => {
             res.json({
-                admins: admins.map(
-                (admin) => admin.apiRepr())
+                users: users.map(
+                (user) => user.apiRepr())
             });
     })
     .catch(
@@ -24,20 +24,21 @@ router.get('/', (req, res) => {
       });
 });
 
-//Get individual admin accounts
+//Get individual user accounts
 router.get('/:id', (req, res) => {
-    adminModel
+    UserModel
         .findById(req.params.id)
         .exec()
-        .then(admin => res.json(admin.apiRepr()))
+        .then(user => res.json(user.apiRepr()))
         .catch(err => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})
     });
 });
-//Create new admin accounts
-router.post('/', (req, res) => {
-    const requiredFields = ['firstName', 'lastName', 'email', 'password'];
+//Create new user accounts
+router.post('/', jsonParser, (req, res) => {
+    console.log(req.body);
+    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'courses'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -46,21 +47,23 @@ router.post('/', (req, res) => {
             return res.status(400).send(message);
         }
     }
-    adminModel
+    UserModel
     .create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password})
+        password: req.body.password,
+        courses: req.body.courses
+    })
     .then(
-    admin => res.status(201).json(admin.apiRepr()))
+    user => res.status(201).json(user.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});
     });
 });
-//Update admin accounts
-router.put('/:id', (req, res) => {
+//Update user accounts
+router.put('/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -69,26 +72,26 @@ router.put('/:id', (req, res) => {
     res.status(400).json({message: message});
   }
     const toUpdate = {};
-    const updateablefields = ['firstName', 'lastName', 'email', 'password'];
+    const updateablefields = ['firstName', 'lastName', 'email', 'password', 'courses'];
     
     updateablefields.forEach(field => {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    adminModel
+    UserModel
         .findByIdAndUpdate(req.params.id, {$set: toUpdate})
         .exec()
-        .then(admin => res.status(204).end())
+        .then(user => res.status(200).json(toUpdate))
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-//Delete Admin Accounts
+//Delete user Accounts
 router.delete('/:id', (req, res) => {
-    adminModel
+    UserModel
         .findByIdAndRemove(req.params.id)
         .exec()
-        .then(admin => res.status(204).end())
+        .then(user => res.status(204).end())
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
