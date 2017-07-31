@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const formidable = require('formidable');
+const path = require('path');
+const fs = require('fs');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
@@ -37,14 +39,26 @@ router.get('/:id', (req, res) => {
     });
 });
 //Create new files
-router.post('/', bodyParser, (req, res) => {
-    console.log(req.body);
+router.post('/', (req, res) => {
     const form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
-        console.log('file uploading');
-        console.log(fields, files);
-    })
-    return console.log(req.files);
+        console.log('file uploading', fields, files);
+        const temp = files.file.path,
+            fileSize = files.file.size,
+            fileExt = files.file.name.split('.').pop(),
+            index = temp.lastIndexOf('/') + 1,
+            fileName = temp.substr(index);
+        const filePath = path.join(process.env.PWD, 'public/uploads', fileName + '.' + fileExt);
+        fs.readFile(temp, (err, data) => {
+            fs.writeFile(filePath, data, err => {
+                if(err){
+                    res.status(500).json({success: false, err});
+                }
+                res.status(200).json({success: true});
+            })
+        });
+    });
+    return;
     const requiredFields = ['title', 'author', 'yearPublished', 'file'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
