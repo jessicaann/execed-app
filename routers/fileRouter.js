@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
                 files: files.map(
                 (file) => file.apiRepr())
             });
-    })
+        })
     .catch(
       err => {
         console.error(err);

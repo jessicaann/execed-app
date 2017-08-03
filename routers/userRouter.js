@@ -37,7 +37,6 @@ router.get('/:id', (req, res) => {
 });
 //Create new user accounts
 router.post('/', jsonParser, (req, res) => {
-    console.log(req.body);
     const requiredFields = ['firstName', 'lastName', 'email', 'password', 'courses'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -47,21 +46,34 @@ router.post('/', jsonParser, (req, res) => {
             return res.status(400).send(message);
         }
     }
+    //make sure an account with the same email address doesn't already exist
     UserModel
-    .create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        courses: req.body.courses
-    })
-    .then(
-    user => res.status(201).json(user.apiRepr()))
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
+    .findOne({email: req.body.email})
+        .exec(function(ee, found_userAccount) {
+        console.log('found_userAccount: '+ found_userAccount);
+        if (err) { return next(err);}
+        if (found_userAccount) {
+            res.status(400).json({message: 'An account already exists using this email address.'})
+        }
+        else {
+            UserModel
+            .create({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: req.body.password,
+                courses: req.body.courses
+            })
+            .then(
+                user => res.status(201).json(user.apiRepr()))
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({message: 'Internal server error'});
+            });
+        }
     });
 });
+
 //Update user accounts
 router.put('/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {

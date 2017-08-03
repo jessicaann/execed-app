@@ -1,54 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Executive Education App</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link href="main.css" rel="stylesheet">
 	<link href="signin.css" rel="stylesheet">
-  <link href="dashboard.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
+    <link href="dashboard.css" rel="stylesheet">
+    <link href="cover.css" rel="stylesheet">
 </head>
 <body>
-<!-- Sign-In Page-->
-	<div class="container">
+<!-- Cover Page - Choose Sign-In -->
+<div class="site-wrapper">
 
-      <form class="form-signin">
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Cover</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Features</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+<!-- Users Sign-In Page-->
+	<div class="container hidden">
+      <form class="form-signin" action="/users" method="get">
         <h2 class="form-signin-heading">Executive Education App</h2>
-        <h3>Sign In</h3>
+        <h3>Participant Sign In</h3>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+        <div class="newsignup">
+            New to this app? Sign Up
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+<!-- Admin Sign-In Page-->
+	<div class="container hidden">
+      <form class="form-signin" action="/admins" method="get">
+        <h2 class="form-signin-heading">Executive Education App</h2>
+        <h3>Admin Sign In</h3>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="newsignup">
+            New to this app? Sign Up
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
     </div> <!-- /container -->
 <!-- New User Page-->
-    <div class="container">
-
-    <form class="form-horizontal">
+    <div class="container hidden">
+    <form class="form-horizontal" action="/users" method="post">
         <h2 class="form-heading">Executive Education App</h2>
         <h3>New User Sign Up</h3>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <label for="firstName" class="sr-only">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="sr-only">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="sr-only">Email</label>
             <div class="col-sm-10">
                 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+            <label for="inputPassword3" class="sr-only">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="courses" class="sr-only">Courses</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="courses" placeholder="Course ID">
             </div>
         </div>
         <div class="form-group">

@@ -16,6 +16,13 @@ body {
 .form-signin .checkbox {
   font-weight: normal;
 }
+.form-signin .newsignup {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.form-signin .newsignup {
+  font-weight: normal;
+}
 .form-signin .form-control {
   position: relative;
   height: auto;
