@@ -23,6 +23,10 @@ body {
 .form-signin .newsignup {
   font-weight: normal;
 }
+.form-signin p {
+  display: inline;
+  font-style: italic;
+}
 .form-signin .form-control {
   position: relative;
   height: auto;

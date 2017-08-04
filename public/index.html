@@ -21,28 +21,31 @@
 
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">Cover</h3>
+              <h3 class="masthead-brand">Welcome</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
+                  <!-- <li class="active"><a href="#">Home</a></li>
                   <li><a href="#">Features</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Contact</a></li> -->
                 </ul>
               </nav>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <h1 class="cover-heading">Executive Education App</h1>
+            <p class="lead">Your program schedule and pre-work in one easy-to-access place.</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+              <a href="#" class="btn btn-lg btn-default jsPaxBttn">Participant</a>
+            </p>
+              <p class="lead">
+              <a href="#" class="btn btn-lg btn-default jsAdminBttn">Administrator</a>
             </p>
           </div>
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+              <p>Executive Education Product of<a href="http://thunderbird.asu.edu"> Thunderbird School of Global Management</a>. </p>
             </div>
           </div>
 
@@ -52,7 +55,7 @@
 
     </div>
 <!-- Users Sign-In Page-->
-	<div class="container hidden">
+	<div class="userSignIn container hidden">
       <form class="form-signin" action="/users" method="get">
         <h2 class="form-signin-heading">Executive Education App</h2>
         <h3>Participant Sign In</h3>
@@ -61,14 +64,14 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="newsignup">
-            New to this app? Sign Up
+            New to this app? <p class="signUpInvite">Sign Up</p>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
     </div> <!-- /container -->
 <!-- Admin Sign-In Page-->
-	<div class="container hidden">
+	<div class=" adminSignIn container hidden">
       <form class="form-signin" action="/admins" method="get">
         <h2 class="form-signin-heading">Executive Education App</h2>
         <h3>Admin Sign In</h3>
@@ -77,14 +80,14 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="newsignup">
-            New to this app? Sign Up
+            New to this app? <a href="">Sign Up</a>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
     </div> <!-- /container -->
 <!-- New User Page-->
-    <div class="container hidden">
+    <div class="newUserSignUp container hidden">
     <form class="form-horizontal" action="/users" method="post">
         <h2 class="form-heading">Executive Education App</h2>
         <h3>New User Sign Up</h3>
@@ -345,7 +348,7 @@
 
 	<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="client.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
