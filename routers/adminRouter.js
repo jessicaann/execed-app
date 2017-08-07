@@ -6,6 +6,42 @@ const jsonParser = bodyParser.json();
 
 const {AdminModel} = require('../models/admin');
 
+//Admin Login - Create a Session
+router.post('/session', jsonParser, (req, res) => {
+    console.log(req.body);
+    const requiredFields = ['email', 'password'];
+    for (let i=0; i<requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+    AdminModel
+    .findOne({email: req.body.email})
+    .exec()
+    .then(admin => {
+        if(admin) {
+            //validate the password
+            if(admin.password !== req.body.password) {
+                res.status(404).json({message: 'Invalid login'})
+            }
+            else {
+                //create the session
+                res.status(200).json({accessToken: admin.id})
+            }
+        }
+        else {
+            res.status(404).json({message: 'Invalid login'})
+        }
+    })
+})
+//Delete the Session
+router.delete('/session', (req, res) => {
+    res.status(204).send
+})
+
 //Get all admin accounts
 router.get('/', (req, res) => {
     AdminModel

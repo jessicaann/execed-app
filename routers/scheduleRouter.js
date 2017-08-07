@@ -35,6 +35,18 @@ router.get('/:id', (req, res) => {
             res.status(500).json({message: 'Internal server error'})
     });
 });
+
+//Get schedules by Admin Reference
+router.get('/:admin', (req, res) => {
+    ScheduleModel
+        .findById(req.params.admin)
+        .exec()
+        .then(schedule => res.json(schedule.apiRepr()))
+        .catch(err => {
+        console.error(err);
+            res.status(500).json({message: 'Internal server error'})
+    });
+});
 //Create new schedules
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['title','sessions', 'admin'];

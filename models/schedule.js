@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 //Schedule Schema
 const scheduleSchema = mongoose.Schema({
     title: {type: String, required: true},
+    dates: {type: String, required: true},
     sessions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SessionModel'
@@ -16,6 +17,7 @@ const scheduleSchema = mongoose.Schema({
 scheduleSchema.methods.apiRepr = function(){
     return {
         id: this.id,
+        dates: this.dates,
         title: this.title,
         sessions: this.sessions,
         admin: this.admin
