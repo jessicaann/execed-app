@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const {UserModel} = require('../models/user');
-//Post, Delete - all with /session
+
+
+//User Login - Create a Session
 router.post('/session', jsonParser, (req, res) => {
     console.log(req.body);
     const requiredFields = ['email', 'password'];
@@ -28,7 +30,7 @@ router.post('/session', jsonParser, (req, res) => {
             }
             else {
                 //create the session
-                res.status(200).json({accessToken: user.id})
+                res.status(200).json({accessToken: user.id, username: user.fullName})
             }
         }
         else {
@@ -40,6 +42,7 @@ router.post('/session', jsonParser, (req, res) => {
 router.delete('/session', (req, res) => {
     res.status(204).send
 })
+
 //Get all user accounts
 router.get('/', (req, res) => {
     UserModel
@@ -68,6 +71,13 @@ router.get('/:id', (req, res) => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})
     });
+});
+
+//Get all schedules associated with a user
+router.get('/:id/schedules', (req, res) => {
+   UserModel
+        .findById(req.params.id)
+        
 });
 //Create new user accounts
 router.post('/', jsonParser, (req, res) => {

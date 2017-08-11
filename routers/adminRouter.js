@@ -29,7 +29,7 @@ router.post('/session', jsonParser, (req, res) => {
             }
             else {
                 //create the session
-                res.status(200).json({accessToken: admin.id})
+                res.status(200).json({accessToken: admin.id, username: admin.fullName})
             }
         }
         else {

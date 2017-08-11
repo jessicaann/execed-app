@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
@@ -37,11 +38,16 @@ router.get('/:id', (req, res) => {
 });
 
 //Get schedules by Admin Reference
-router.get('/:admin', (req, res) => {
+router.get('/admin/:admin', (req, res) => {
     ScheduleModel
-        .findById(req.params.admin)
+        .find({"admin._id": mongoose.Types.ObjectId(req.params.admin)})
         .exec()
-        .then(schedule => res.json(schedule.apiRepr()))
+        .then(schedules => {
+            res.json({
+                schedules: schedules.map(
+                (schedule) => schedule.apiRepr())
+            });
+    })
         .catch(err => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})

@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    courses: [{
+    schedules: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ScheduleModel',
         required: true
@@ -19,9 +19,13 @@ userSchema.methods.apiRepr = function() {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        courses: this.courses
+        schedules: this.schedules
     };
 }
+
+userSchema.virtual('fullName').get(function() {
+    return `${this.firstName} ${this.lastName}`.trim()
+});
 const UserModel = mongoose.model('User', userSchema);
 
 module.exports = {UserModel};

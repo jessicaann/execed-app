@@ -18,5 +18,9 @@ adminSchema.methods.apiRepr = function() {
     };
 }
 
+adminSchema.virtual('fullName').get(function() {
+    return `${this.firstName} ${this.lastName}`.trim()
+});
+
 const AdminModel = mongoose.model('Admin', adminSchema);
 module.exports={AdminModel};

@@ -3,6 +3,12 @@ body {
   padding-bottom: 40px;
   background-color: #eee;
 }
+.form-signin .invalidLogin {
+  margin-bottom: 10px;
+  text-align: center;
+  color: red;
+  font-weight: normal;
+}
 
 .form-signin {
   max-width: 330px;
@@ -16,13 +22,7 @@ body {
 .form-signin .checkbox {
   font-weight: normal;
 }
-.form-signin .newsignup {
-  margin-bottom: 10px;
-  text-align: center;
-}
-.form-signin .newsignup {
-  font-weight: normal;
-}
+
 .form-signin p {
   display: inline;
   font-style: italic;
