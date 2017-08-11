@@ -1,12 +1,5 @@
 var BASE_URL = "http://localhost:8080"
 
-//Page Reveals - Handles Clicks
-$(function () {
-    $(".jsPaxBttn").click(function() {
-        $(".userSignIn").removeClass("hidden");
-        $(".signInSelect").addClass("hidden");
-    });
-});
 //User Sign In Submit
 $(".userSignInForm").submit(function(event) {
     event.preventDefault();
@@ -36,10 +29,10 @@ $(".userSignInForm").submit(function(event) {
     $.ajax(getLoginSettings);
 })
 
-//Get Schedules for Admin
+//Get Schedules for User
 function getSchedules(successCallback) {
     var getScheduleSettings = {
-      url: BASE_URL + "/schedules/admin/" + localStorage.getItem("adminId"),
+      url: BASE_URL + "/users/" + localStorage.getItem("userId") + "/schedules",
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
@@ -56,9 +49,10 @@ function getSchedules(successCallback) {
 // Display Schedules
   function displaySchedules (response) {
      console.log(response);
+    console.log("displaySchedules");
       var transElement = '';
-    if(response.schedules) {
-        response.schedules.forEach(function(schedule) {
+    if(response.users.schedules) {
+        response.users.schedules.forEach(function(schedule) {
             transElement += `<div class="col-xs-6 col-sm-3 placeholder">
                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                 <h4>${schedule.title}</h4>
@@ -70,13 +64,13 @@ function getSchedules(successCallback) {
   }
 
 function displayName(){
-    $('.username span').text(localStorage.getItem('adminName'));
+    $('.username span').text(localStorage.getItem('userName'));
 }
 //Watch Dashboard Page Load
     function watchDashboardPageLoad() {
         displayName();
         getSchedules(displaySchedules);
     }
-    if(location.pathname === "/dashboard.html") {
+    if(location.pathname === "/dashboardUser.html") {
         $(watchDashboardPageLoad);
     }

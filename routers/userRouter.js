@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
@@ -73,11 +74,22 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// db.users.find({"_id":ObjectId( "597e53f763f56e2c34cbed45")},{schedules:1})
 //Get all schedules associated with a user
 router.get('/:id/schedules', (req, res) => {
    UserModel
-        .findById(req.params.id)
-        
+        .find({"_id": mongoose.Types.ObjectId(req.params.id)}, {schedules: 1})
+        .exec()
+        .then(users => {
+            res.json({
+                users: users.map(
+                (user) => user.apiRepr())
+            });
+   })
+        .catch(err => {
+        console.error(err);
+            res.status(500).json({message: 'Internal server error'})
+    });
 });
 //Create new user accounts
 router.post('/', jsonParser, (req, res) => {
