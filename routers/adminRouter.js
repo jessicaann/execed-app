@@ -96,7 +96,7 @@ router.post('/', jsonParser, (req, res) => {
     });
 });
 //Update admin accounts
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/profile/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +

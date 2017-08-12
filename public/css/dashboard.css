@@ -107,3 +107,10 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.itemdeleted {
+  margin-bottom: 10px;
+  text-align: center;
+  color: red;
+  font-weight: normal;
+}
