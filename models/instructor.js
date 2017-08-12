@@ -15,8 +15,7 @@ instructorSchema.virtual('instructorName').get(function() {
 instructorSchema.methods.apiRepr = function() {
     return {
         id: this.id,
-        firstName: this.firstName,
-        lastName: this.lastName,
+        instructorName: this.instructorName,
         email: this.email
     };
 }

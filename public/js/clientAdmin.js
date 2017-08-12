@@ -21,7 +21,7 @@ $(".adminSignInForm").submit(function(event) {
       success: function(res){
           localStorage.setItem("adminId", res.accessToken);
           localStorage.setItem("adminName", res.username);
-          location.href="./dashboard.html";
+          location.href="/dashboardAdmin.html";
       }
     }
     $.ajax(getLoginSettings);

@@ -14,6 +14,7 @@ adminSchema.methods.apiRepr = function() {
         id: this.id,
         firstName: this.firstName,
         lastName: this.lastName,
+        fullName: this.fullName,
         email: this.email
     };
 }
