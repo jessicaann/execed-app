@@ -59,7 +59,7 @@ router.post('/', jsonParser, (req, res) => {
     });
 });
 //Update instructor
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/profile/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -71,7 +71,7 @@ router.put('/:id', jsonParser, (req, res) => {
     const updateablefields = ['firstName', 'lastName', 'email'];
     
     updateablefields.forEach(field => {
-        if (field in req.body) {
+        if (field in req.body && req.body[field] !== "") {
             toUpdate[field] = req.body[field];
         }
     });
@@ -83,7 +83,7 @@ router.put('/:id', jsonParser, (req, res) => {
 });
 
 //Delete instructor
-router.delete('/:id', (req, res) => {
+router.delete('/profile/:id', (req, res) => {
     InstructorModel
         .findByIdAndRemove(req.params.id)
         .exec()

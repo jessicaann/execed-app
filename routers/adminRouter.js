@@ -115,7 +115,7 @@ router.put('/profile/:id', jsonParser, (req, res) => {
     AdminModel
         .findByIdAndUpdate(req.params.id, {$set: toUpdate})
         .exec()
-        .then(user => res.status(200).json(toUpdate))
+        .then(admin => res.status(200).json(toUpdate))
         .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
