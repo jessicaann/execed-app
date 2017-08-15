@@ -1,17 +1,15 @@
-$(".newAdminForm").submit(function(event) {
+$(".newInstructorForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
-    const firstName = $(".newAdminForm #firstName").val();
-    const lastName = $(".newAdminForm #lastName").val();
-    const email = $(".newAdminForm #email").val();
-    const password = $(".newAdminForm #password").val();
+    const firstName = $(".newInstructorForm #firstName").val().trim();
+    const lastName = $(".newInstructorForm #lastName").val().trim();
+    const email = $(".newInstructorForm #email").val().trim();
     var getLoginSettings = {
-      url: BASE_URL + "/admins",
+      url: BASE_URL + "/instructors",
       data: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
-        email: email,
-        password: password
+        email: email
       }),
       dataType: "json",
         headers: {
@@ -19,8 +17,8 @@ $(".newAdminForm").submit(function(event) {
         },
       method: "POST",
       success: function(res){var transElement = 
-            `<div class="positive-msg-display">Admin created</div>`;
+            `<div class="positive-msg-display">Instructor created</div>`;
             $(".msg-display").html(transElement);}
-    }
+      }
     $.ajax(getLoginSettings);
 })

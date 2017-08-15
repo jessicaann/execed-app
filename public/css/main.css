@@ -1,3 +1,15 @@
 .js-editAdmin:hover {
     background-color: #428bca;
 }
+.positive-msg-display {
+  margin-bottom: 10px;
+  text-align: center;
+  color: green;
+  font-weight: normal;
+}
+.negative-msg-display {
+  margin-bottom: 10px;
+  text-align: center;
+  color: red;
+  font-weight: normal;
+}

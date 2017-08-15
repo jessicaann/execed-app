@@ -16,7 +16,7 @@ $(".adminSignInForm").submit(function(event) {
         },
       method: "POST",
       error: function(res){var transElement = 
-            `<div class="invalidLogin">Invalid login</div>`;
+            `<div class="negative-msg-display">Invalid login</div>`;
             $(".form-signin div").html(transElement);},
       success: function(res){
           localStorage.setItem("adminId", res.accessToken);
