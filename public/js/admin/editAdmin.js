@@ -1,3 +1,30 @@
+//do the call that gets the admin info and populates it into the form based on the email on page load
+function getAdmins(successCallback) {
+    localStorage.setItem('editId', location.search.split("?")[1].split("=")[1]);
+    var getAdminSettings = {
+      url: BASE_URL + "/admins/" + localStorage.getItem('editId'),
+      data: JSON.stringify({}),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "GET",
+      success: function(res){
+          successCallback(res);
+      }
+    }
+    $.ajax(getAdminSettings);
+  }
+
+$(getAdmins(displayAdmins));
+
+function displayAdmins(response){
+    const {email, firstName, lastName} = response;
+    $('#firstName').val(firstName);
+    $('#email').val(email);
+    $('#lastName').val(lastName);
+}
+
 $(".editAdminForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
@@ -7,12 +34,13 @@ $(".editAdminForm").submit(function(event) {
     const password = $(".editAdminForm #password").val();
     
     var getAdminSettings = {
-      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'), //need to get the admin id that we want to change from local storage - store from the all admins page?
+      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'),
       data: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password
+        password: password,
+        id: localStorage.getItem('editId')
       }),
       dataType: "json",
         headers: {
@@ -21,7 +49,6 @@ $(".editAdminForm").submit(function(event) {
       method: "PUT",
       success: function(response){
           console.log("It's a miracle:", response);
-          location.href="../admin/admins.html";
       }
     }
     $.ajax(getAdminSettings);
@@ -31,7 +58,7 @@ $(".delete").click(function(event) {
     event.preventDefault();
  
     var getAdminSettings = {
-      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'), //need to get the admin id that we want to change from local storage - store from the all admins page?
+      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {

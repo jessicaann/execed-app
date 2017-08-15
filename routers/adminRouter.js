@@ -108,7 +108,7 @@ router.put('/profile/:id', jsonParser, (req, res) => {
     const updateablefields = ['firstName', 'lastName', 'email', 'password'];
     
     updateablefields.forEach(field => {
-        if (field in req.body) {
+        if (field in req.body && req.body[field] !== "") {
             toUpdate[field] = req.body[field];
         }
     });
