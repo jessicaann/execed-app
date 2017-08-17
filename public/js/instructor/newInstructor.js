@@ -4,7 +4,7 @@ $(".newInstructorForm").submit(function(event) {
     const firstName = $(".newInstructorForm #firstName").val().trim();
     const lastName = $(".newInstructorForm #lastName").val().trim();
     const email = $(".newInstructorForm #email").val().trim();
-    var getLoginSettings = {
+    var getInstructorSettings = {
       url: BASE_URL + "/instructors",
       data: JSON.stringify({
         firstName: firstName,
@@ -20,5 +20,5 @@ $(".newInstructorForm").submit(function(event) {
             `<div class="positive-msg-display">Instructor created</div>`;
             $(".msg-display").html(transElement);}
       }
-    $.ajax(getLoginSettings);
+    $.ajax(getInstructorSettings);
 })

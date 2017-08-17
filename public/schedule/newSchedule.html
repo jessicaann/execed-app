@@ -41,14 +41,14 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="heading">Admin</li>
-            <li><a href="admins.html">My admins</a></li>
-            <li><a href="newAdmin.html">Create new admin</a></li>
-            <li><a href="admin_edit_remove.html">Edit admin</a></li>
+            <li><a href="../admin/admins.html">My admins</a></li>
+            <li><a href="../admin/newAdmin.html">Create new admin</a></li>
+            <li><a href="../admin/admin_edit_remove.html">Edit admin</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li class="heading">Schedules</li>
-            <li class="active"><a href="dashboard.html">My schedules<span class="sr-only">(current)</span></a></li>
-            <li><a href="">Create new schedule</a></li>
+            <li class="active"><a href="../admin/dashboard.html">My schedules<span class="sr-only">(current)</span></a></li>
+            <li><a href="newSchedule.html">Create new schedule</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li class="heading">Users</li>
@@ -71,22 +71,17 @@
           </ul> 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit/Remove Admin</h1>
-          <div class="editAdmin">
-              <form method="post" action="/admins/profile" class="editAdminForm">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder="First Name" value="" required autofocus>
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder="Last Name" value="" required autofocus>
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Email" value="" required autofocus>
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password" value="" autofocus>
-                <div class="btn-group">
-                    <button class="btn btn-lg btn-warning delete" type="submit">Delete Admin</button> 
-                    <button class="btn btn-lg btn-primary" type="submit">Save Changes</button>
-                </div>
-                
+          <h1 class="page-header">Create New Instructor</h1>
+          <div>
+              <div class="msg-display"></div>
+              <form method="post" action="/instructors" class="newInstructorForm">
+                <label for="firstName"></label>
+                <input type="text" id="firstName" placeholder="First Name" required autofocus>
+                <label for="lastName"></label>
+                <input type="text" id="lastName" placeholder="Last Name" required autofocus>
+                <label for="email"></label>
+                <input type="email" id="email" placeholder="Email" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
               </form>
           </div>
           </div>
@@ -97,6 +92,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/config.js"></script>
-    <script type="text/javascript" src="../js/admin/editAdmin.js"></script>
+    <script type="text/javascript" src="../js/schedule/newSchedule.js"></script>
 </body>
 </html>

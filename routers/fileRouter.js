@@ -40,6 +40,7 @@ router.get('/:id', (req, res) => {
 });
 //Create new files
 router.post('/', (req, res) => {
+    console.log(req.body, req.form);
     const form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
         console.log('file uploading', fields, files);
@@ -54,35 +55,37 @@ router.post('/', (req, res) => {
                 if(err){
                     res.status(500).json({success: false, err});
                 }
-                res.status(200).json({success: true});
+                const requiredFields = ['title', 'firstName', 'lastName', 'yearPublished'];
+                for (let i=0; i<requiredFields.length; i++) {
+                    const field = requiredFields[i];
+                    if (!(field in fields)) {
+                        const message = `Missing \`${field}\` in request body`
+                        console.error(message);
+                        return res.status(400).send(message);
+                    }
+                }
+                FileModel
+                .create({
+                    title: fields.title,
+                    author: {
+                        firstName: fields.firstName,
+                        lastName: fields.lastName
+                    },
+                    yearPublished: fields.yearPublished,
+                    file: `${fileName}.${fileExt}`
+                })
+                .then(file => res.status(201).json(file.apiRepr()))
+                .catch(err => {
+                    console.error(err);
+                    res.status(500).json({message: 'Internal server error'});
+                });
             })
         });
     });
-    return;
-    const requiredFields = ['title', 'author', 'yearPublished', 'file'];
-    for (let i=0; i<requiredFields.length; i++) {
-        const field = requiredFields[i];
-        if (!(field in req.body)) {
-            const message = `Missing \`${field}\` in request body`
-            console.error(message);
-            return res.status(400).send(message);
-        }
-    }
-    FileModel
-    .create({
-        title: req.body.title,
-        author: req.body.author,
-        yearPublished: req.body.yearPublished,
-        file: req.body.file})
-    .then(
-    file => res.status(201).json(file.apiRepr()))
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-    });
 });
+
 //Update file
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/profile/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -94,7 +97,7 @@ router.put('/:id', jsonParser, (req, res) => {
     const updateablefields = ['title', 'author', 'yearPublished', 'file'];
     
     updateablefields.forEach(field => {
-        if (field in req.body) {
+        if (field in req.body && req.body[field] !== "") {
             toUpdate[field] = req.body[field];
         }
     });
@@ -106,7 +109,7 @@ router.put('/:id', jsonParser, (req, res) => {
 });
 
 //Delete file
-router.delete('/:id', (req, res) => {
+router.delete('/profile/:id', (req, res) => {
     FileModel
         .findByIdAndRemove(req.params.id)
         .exec()
