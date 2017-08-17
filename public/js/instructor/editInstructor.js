@@ -1,7 +1,7 @@
 //do the call that gets the instructor info and populates it into the form based on the email on page load
 function getInstructors(successCallback) {
     localStorage.setItem('editInstrId', location.search.split("?")[1].split("=")[1]);
-    var getInstructorSettings = {
+     var getInstructorSettings = {
       url: BASE_URL + "/instructors/" + localStorage.getItem('editInstrId'),
       data: JSON.stringify({}),
       dataType: "json",
