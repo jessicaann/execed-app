@@ -1,18 +1,21 @@
 $(".newScheduleForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
-    const firstName = $(".newScheduleForm #firstName").val().trim();
-    const lastName = $(".newScheduleForm #lastName").val().trim();
-    const email = $(".newScheduleForm #email").val().trim();
+    const title= $(".newScheduleForm #title").val().trim();
+    const dates = $(".newScheduleForm #dates").val().trim();
+    const admin = localStorage.getItem('adminId');
+    const sessions = $(".newScheduleForm #sessions").val().split();
+    console.log(sessions);
     var getScheduleSettings = {
       url: BASE_URL + "/schedules",
       data: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        email: email
+        title: title,
+        dates: dates,
+        admin: admin,
+        sessions: sessions
       }),
       dataType: "json",
-        headers: {
+      headers: {
             "content-type": "application/json"
         },
       method: "POST",
@@ -22,3 +25,44 @@ $(".newScheduleForm").submit(function(event) {
       }
     $.ajax(getScheduleSettings);
 })
+
+function getSessions(successCallback) {
+    var getSessionSettings = {
+      url: BASE_URL + "/sessions",
+      data: JSON.stringify({}),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "GET",
+      success: function(res){
+          console.log(res);
+          successCallback(res);
+      }
+    }
+    $.ajax(getSessionSettings);
+  }
+// Display Sessions in dropdown
+  function displaySessions (response) {
+     console.log(response);
+    console.log("displaySessions");
+      var transElement = '';
+    if(response.sessions) {
+        response.sessions.forEach(function(session) {
+            transElement += `<option value="${session.id}">${session.title}</option>`;
+        })
+    }
+    $('#sessions').html(transElement);
+  }
+
+function displayName(){
+    $('.username span').text(localStorage.getItem('adminName'));
+}
+
+//Watch Page Load
+function watchPageLoad() {
+    displayName();
+    getSessions(displaySessions);
+}
+
+$(watchPageLoad);

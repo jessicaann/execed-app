@@ -6,6 +6,23 @@ const jsonParser = bodyParser.json();
 
 const {SessionModel} = require('../models/session');
 
+//Get all sessions
+router.get('/', (req, res) => {
+    SessionModel
+        .find()
+        .exec()
+        .then(sessions => {
+            res.json({
+                sessions: sessions.map(
+                (session) => session.apiRepr())
+            });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+      });
+});
 
 //Get individual sessions
 router.get('/:id', (req, res) => {
