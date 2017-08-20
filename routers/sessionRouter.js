@@ -10,6 +10,7 @@ const {SessionModel} = require('../models/session');
 router.get('/', (req, res) => {
     SessionModel
         .find()
+        .populate("instructors", "preWork")
         .exec()
         .then(sessions => {
             res.json({
@@ -24,6 +25,22 @@ router.get('/', (req, res) => {
       });
 });
 
+//Get sessions by Admin Reference
+router.get('/admin/:admin', (req, res) => {
+    ScheduleModel
+        .find({"admin._id": mongoose.Types.ObjectId(req.params.admin)})
+        .exec()
+        .then(sessions => {
+            res.json({
+                sessions: schedules.map(
+                (session) => schedule.apiRepr())
+            });
+    })
+        .catch(err => {
+        console.error(err);
+            res.status(500).json({message: 'Internal server error'})
+    });
+});
 //Get individual sessions
 router.get('/:id', (req, res) => {
     SessionModel

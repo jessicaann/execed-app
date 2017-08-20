@@ -79,7 +79,7 @@
                 <label for="dates">Dates:</label>
                 <input type="text" id="dates" placeholder="Program Date(s)" required autofocus>
                 <label for="sessions">Sessions:</label>
-                <select name="sessions" id="sessions">
+                <select name="sessions" id="sessions" multiple>
                     <option value="Session Name 1">Session Name 1</option>
                     <option value="Session Name 2">Session Name 2</option>
                     <option value="Session Name 3">Session Name 3</option>
@@ -87,7 +87,33 @@
                 <button class="btn btn-lg btn-primary" type="submit">Submit</button>
               </form>
             <div>
-                <a href="newSession.html" class="btn btn-info btn-lg btn-primary" role="button">Create new sessions</a>
+                <button type="button" class="btn btn-info btn-lg btn-primary newSessionBtn" role="button">Create new sessions</button>
+            </div>
+            <div class="session-msg-display"></div>
+            <div class="newSession hidden">
+                <form method="post" class="newSessionForm" action="/sessions">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" placeholder="Title" required autofocus>
+                    <label for="instructors">Instructors:</label>
+                    <select name="instructors" id="instructors" multiple>
+                        <option value="Instructor Name 1">Instructor Name 1</option>
+                        <option value="Instructor Name 2">Instructor Name 2</option>
+                        <option value="Instructor Name 3">Instructor Name 3</option>
+                    </select>
+                    <label for="startTime">Start Time</label>
+                    <input type="datetime-local" id="startTime" placeholder="Start Time" required autofocus>
+                    <label for="endTime">End Time</label>
+                    <input type="datetime-local" id="endTime" placeholder="End Time" required autofocus>
+                    <label for="Prework">Prework</label>
+                    <select name="prework" id="prework" multiple>
+                        <option value="Prework Name 1">Prework Name 1</option>
+                        <option value="Prework Name 2">Prework Name 2</option>
+                    </select>
+                    <div class="btn-group">
+                    <button class="btn btn-lg btn-warning cancel" type="button">Cancel</button> 
+                    <button class="btn btn-lg btn-primary" type="submit">Create Session</button>
+                </div>
+                </form>
             </div>
           </div>
         </div>

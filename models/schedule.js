@@ -6,11 +6,11 @@ const scheduleSchema = mongoose.Schema({
     dates: {type: String, required: true},
     sessions: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'SessionModel'
+        ref: 'Session'
     }],
     admin: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'AdminModel'
+        ref: 'Admin'
     }]
 });
 //Schedule API Reveal

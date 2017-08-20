@@ -29,8 +29,18 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     ScheduleModel
         .findById(req.params.id)
+        .populate({
+            path:"sessions",
+            populate: {path: "instructors"},
+            populate: {path: "preWork"}
+        })
         .exec()
-        .then(schedule => res.json(schedule.apiRepr()))
+        .then(schedule => {
+            schedule.sessions = schedule.sessions.map(session => {
+                return session.apiRepr();
+            });
+            return res.json(schedule.apiRepr());
+        })
         .catch(err => {
         console.error(err);
             res.status(500).json({message: 'Internal server error'})
@@ -40,7 +50,7 @@ router.get('/:id', (req, res) => {
 //Get schedules by Admin Reference
 router.get('/admin/:admin', (req, res) => {
     ScheduleModel
-        .find({"admin._id": mongoose.Types.ObjectId(req.params.admin)})
+        .find({"admin": mongoose.Types.ObjectId(req.params.admin)})
         .exec()
         .then(schedules => {
             res.json({
@@ -67,6 +77,7 @@ router.post('/', jsonParser, (req, res) => {
     ScheduleModel
     .create({
         title: req.body.title,
+        dates: req.body.dates,
         sessions: req.body.sessions,
         admin: req.body.admin})
     .then(

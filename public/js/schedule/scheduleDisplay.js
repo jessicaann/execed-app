@@ -20,15 +20,15 @@ function getSchedules(successCallback) {
       $(".scheduleTitle").text(`${response.title}`);
       $(".scheduleDates").text(`${response.dates}`);
       var sessionsElements = '';
-    if(response.schedules) {
-        response.schedules.forEach(function(schedule) {
-            transElement += `<a href="../session/session_edit_remove.html?scheduleId=${schedule.session.id}" class="js-edit">
+    if(response.sessions) {
+        response.sessions.forEach(function(session) {
+            sessionsElements += `<a href="../session/session_edit_remove.html?scheduleId=${session.id}" class="js-edit">
                 <div class="scheduleItem">
-                <p>ID: ${schedule.session.id}</p>
-                <p>Title: ${schedule.session.title}</p>
-                <p>Instructor: ${schedule.session.instructor}</p>
-                <p>Time: ${schedule.session.startTime} - ${schedule.session.endTime}</p>
-                <p>Prework: ${schedule.session.prework}</p>
+                <p>ID: ${session.id}</p>
+                <p>Title: ${session.title}</p>
+                <p>Instructor: ${session.instructor}</p>
+                <p>Time: ${session.startTime} - ${session.endTime}</p>
+                <p>Prework: ${session.prework}</p>
             </div>
             </a>`;
         })

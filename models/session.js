@@ -5,14 +5,18 @@ const sessionSchema = mongoose.Schema({
     title: {type: String, required: true},
     instructors: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'InstructorModel',
+        ref: 'Instructor',
         required: true
     }],
     startTime: {type: Date, required: true},
     endTime: {type: Date, required: true},
     preWork: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'FileModel'
+        ref: 'File'
+    }],
+    admin: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'AdminModel'
     }]
 });
 //Session API Reveal
