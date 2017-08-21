@@ -32,3 +32,14 @@ $(".newFileForm").submit(function(event) {
       }
     $.ajax(getFileSettings);
 })
+
+function displayName(){
+    $('.username span').text(localStorage.getItem('adminName'));
+}
+
+//Watch Page Load
+function watchPageLoad() {
+    displayName();
+}
+
+$(watchPageLoad);

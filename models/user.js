@@ -19,6 +19,7 @@ userSchema.methods.apiRepr = function() {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
+        fullName: this.fullName,
         schedules: this.schedules
     };
 }
@@ -30,5 +31,3 @@ const UserModel = mongoose.model('User', userSchema);
 
 module.exports = {UserModel};
 
-//import {UserModel} from './models/user';
-//import UserModel from './models/user';

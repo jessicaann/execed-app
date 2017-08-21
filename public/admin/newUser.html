@@ -70,38 +70,25 @@
           </ul> 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit/Remove Admin</h1>
-          <div class="editAdmin">
-              <form method="post" action="/users/profile" class="editUserForm form-horizontal">
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="firstName" placeholder="First Name" value="" required autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="lastName" placeholder="Last Name" value="" required autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="email" id="email" placeholder="Email" value="" required autofocus>
-                    </div>
-                </div> 
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="password" id="password" placeholder="Password" value="" autofocus>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-lg btn-warning delete" type="submit">Delete Admin</button> 
-                    <button class="btn btn-lg btn-primary" type="submit">Save Changes</button>
-                </div>
+          <h1 class="page-header">Create New User</h1>
+          <div>
+              <div class="msg-display"></div>
+              <form method="post" action="/users" class="newUserForm">
+                <label for="firstName"></label>
+                <input type="text" id="firstName" placeholder="First Name" required autofocus>
+                <label for="lastName"></label>
+                <input type="text" id="lastName" placeholder="Last Name" required autofocus>
+                <label for="email"></label>
+                <input type="email" id="email" placeholder="Email" required autofocus>
+                <label for="password"></label>
+                <input type="password" id="password" placeholder="Password" required autofocus>
+                <label for="schedule">Schedule</label>
+                    <select name="schedules" id="schedules" multiple>
+                        <option value="Schedule Name 1">Schedule Name 1</option>
+                        <option value="Schedule Name 2">Schedule Name 2</option>
+                    </select>
                 
+                <button class="btn btn-primary" type="submit">Submit</button>
               </form>
           </div>
           </div>
@@ -112,6 +99,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/config.js"></script>
-    <script type="text/javascript" src="../js/admin/editAdmin.js"></script>
+    <script type="text/javascript" src="../js/admin/newUser.js"></script>
 </body>
 </html>

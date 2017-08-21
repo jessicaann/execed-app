@@ -22,3 +22,14 @@ $(".newInstructorForm").submit(function(event) {
       }
     $.ajax(getInstructorSettings);
 })
+
+function displayName(){
+    $('.username span').text(localStorage.getItem('adminName'));
+}
+
+//Watch Page Load
+function watchPageLoad() {
+    displayName();
+}
+
+$(watchPageLoad);

@@ -24,3 +24,14 @@ $(".newAdminForm").submit(function(event) {
     }
     $.ajax(getLoginSettings);
 })
+
+function displayName(){
+    $('.username span').text(localStorage.getItem('adminName'));
+}
+
+//Watch Page Load
+function watchPageLoad() {
+    displayName();
+}
+
+$(watchPageLoad);

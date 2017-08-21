@@ -93,7 +93,7 @@ router.get('/:id/schedules', (req, res) => {
 });
 //Create new user accounts
 router.post('/', jsonParser, (req, res) => {
-    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'courses'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'password', 'schedules'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -105,8 +105,7 @@ router.post('/', jsonParser, (req, res) => {
     //make sure an account with the same email address doesn't already exist
     UserModel
     .findOne({email: req.body.email})
-        .exec(function(ee, found_userAccount) {
-        console.log('found_userAccount: '+ found_userAccount);
+        .exec(function(err, found_userAccount) {
         if (err) { return next(err);}
         if (found_userAccount) {
             res.status(400).json({message: 'An account already exists using this email address.'})
@@ -118,7 +117,7 @@ router.post('/', jsonParser, (req, res) => {
                 lastName: req.body.lastName,
                 email: req.body.email,
                 password: req.body.password,
-                courses: req.body.courses
+                schedules: req.body.schedules
             })
             .then(
                 user => res.status(201).json(user.apiRepr()))

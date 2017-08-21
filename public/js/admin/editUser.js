@@ -1,8 +1,8 @@
-//do the call that gets the admin info and populates it into the form based on the email on page load
-function getAdmins(successCallback) {
-    localStorage.setItem('editId', location.search.split("?")[1].split("=")[1]);
-    var getAdminSettings = {
-      url: BASE_URL + "/admins/" + localStorage.getItem('editId'),
+//do the call that gets the user info and populates it into the form based on the email on page load
+function getUsers(successCallback) {
+    localStorage.setItem('editUserId', location.search.split("?")[1].split("=")[1]);
+    var getUserSettings = {
+      url: BASE_URL + "/users/" + localStorage.getItem('editUserId'),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
@@ -13,34 +13,36 @@ function getAdmins(successCallback) {
           successCallback(res);
       }
     }
-    $.ajax(getAdminSettings);
+    $.ajax(getUserSettings);
   }
 
-$(getAdmins(displayAdmins));
+$(getUsers(displayUsers));
 
-function displayAdmins(response){
-    const {email, firstName, lastName} = response;
+function displayUsers(response){
+    const {email, firstName, lastName, schedules} = response;
     $('#firstName').val(firstName);
     $('#email').val(email);
     $('#lastName').val(lastName);
+    $('#currentSchedule').val(schedules.title);
 }
 
-$(".editAdminForm").submit(function(event) {
+$(".editUserForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
-    const firstName = $(".editAdminForm #firstName").val();
-    const lastName = $(".editAdminForm #lastName").val();
-    const email = $(".editAdminForm #email").val();
-    const password = $(".editAdminForm #password").val();
+    const firstName = $(".editUserForm #firstName").val();
+    const lastName = $(".editUserForm #lastName").val();
+    const email = $(".editUserForm #email").val();
+    const password = $(".editUserForm #password").val();
+    const schedules = $(".editUserForm #schedules").val();
     
-    var getAdminSettings = {
-      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'),
+    var getUserSettings = {
+      url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),
       data: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
-        id: localStorage.getItem('editId')
+        id: localStorage.getItem('editUserId')
       }),
       dataType: "json",
         headers: {
@@ -51,14 +53,14 @@ $(".editAdminForm").submit(function(event) {
           console.log("It's a miracle:", response);
       }
     }
-    $.ajax(getAdminSettings);
+    $.ajax(getUserSettings);
 })
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
  
-    var getAdminSettings = {
-      url: BASE_URL + "/admins/profile/" + localStorage.getItem('editId'),
+    var getUserSettings = {
+      url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
@@ -68,11 +70,11 @@ $(".delete").click(function(event) {
       success: function(response){
           console.log("Item removed", response);
           var transElement = 
-            `<div class="itemdeleted">Admin removed</div>`;
-            $(".editAdmin").html(transElement);
+            `<div class="itemdeleted">User removed</div>`;
+            $(".editUser").html(transElement);
       }
     }
-    $.ajax(getAdminSettings);
+    $.ajax(getUserSettings);
 })
 
 function displayName(){

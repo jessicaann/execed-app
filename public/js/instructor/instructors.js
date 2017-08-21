@@ -30,7 +30,7 @@ function getInstructors(successCallback) {
   }
 
 function displayName(){
-    $('.username span').text(localStorage.getItem('instructorName'));
+    $('.username span').text(localStorage.getItem('adminName'));
 }
 
 //Watch Page Load
