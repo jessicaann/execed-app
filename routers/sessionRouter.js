@@ -10,7 +10,7 @@ const {SessionModel} = require('../models/session');
 router.get('/', (req, res) => {
     SessionModel
         .find()
-        .populate("instructors", "preWork")
+        .populate('instructors preWork')
         .exec()
         .then(sessions => {
             res.json({
@@ -29,6 +29,7 @@ router.get('/', (req, res) => {
 router.get('/admin/:admin', (req, res) => {
     ScheduleModel
         .find({"admin._id": mongoose.Types.ObjectId(req.params.admin)})
+        .populate('instructors preWork')
         .exec()
         .then(sessions => {
             res.json({

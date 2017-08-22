@@ -30,9 +30,7 @@ router.get('/:id', (req, res) => {
     ScheduleModel
         .findById(req.params.id)
         .populate({
-            path:"sessions",
-            populate: {path: "instructors"},
-            populate: {path: "preWork"}
+            path:"sessions"
         })
         .exec()
         .then(schedule => {

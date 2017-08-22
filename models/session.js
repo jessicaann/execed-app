@@ -16,7 +16,7 @@ const sessionSchema = mongoose.Schema({
     }],
     admin: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'AdminModel'
+        ref: 'Admin'
     }]
 });
 //Session API Reveal

@@ -23,5 +23,6 @@ scheduleSchema.methods.apiRepr = function(){
         admin: this.admin
     };
 }
+
 const ScheduleModel = mongoose.model('Schedule', scheduleSchema);
 module.exports = {ScheduleModel};

@@ -33,7 +33,12 @@ $(".editUserForm").submit(function(event) {
     const lastName = $(".editUserForm #lastName").val();
     const email = $(".editUserForm #email").val();
     const password = $(".editUserForm #password").val();
-    const schedules = $(".editUserForm #schedules").val();
+    const schedules = function() {
+        if(){ return $(".editUserForm #schedules").val();
+    } else{
+       return $(".editUserForm #currentSchedule").val();
+    }
+};//can I set this to the current schedule if there is not value in this one?
     
     var getUserSettings = {
       url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),

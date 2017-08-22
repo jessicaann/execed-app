@@ -22,11 +22,13 @@ function getSchedules(successCallback) {
       var sessionsElements = '';
     if(response.sessions) {
         response.sessions.forEach(function(session) {
-            sessionsElements += `<a href="../session/session_edit_remove.html?scheduleId=${session.id}" class="js-edit">
+            sessionsElements += `<a href="../session/session_edit_remove.html?scheduleId=${session.
+            _id}" class="js-edit">
                 <div class="scheduleItem">
-                <p>ID: ${session.id}</p>
+                <p>ID: ${session.
+            _id}</p>
                 <p>Title: ${session.title}</p>
-                <p>Instructor: ${session.instructor}</p>
+                <p>Instructor: ${session.instructors.instructorName}</p>
                 <p>Time: ${session.startTime} - ${session.endTime}</p>
                 <p>Prework: ${session.prework}</p>
             </div>
