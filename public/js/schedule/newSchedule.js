@@ -129,7 +129,7 @@ $(".newSessionForm").submit(function(event) {
     const title= $(".newSessionForm #title").val().trim();
     const startTime = $(".newSessionForm #startTime").val().trim();
     const endTime = $(".newSessionForm #endTime").val().trim();
-    const instructors = $(".newSessionForm #instructors").val();
+    const instructor = $(".newSessionForm #instructors").val();
     const preWork = $(".newSessionForm #prework").val();
     const admin = localStorage.getItem('adminId');
     
@@ -139,7 +139,7 @@ $(".newSessionForm").submit(function(event) {
         title: title,
         startTime: startTime,
         endTime: endTime,
-        instructors: instructors,
+        instructor: instructor,
         preWork: preWork,
         admin: admin
       }),

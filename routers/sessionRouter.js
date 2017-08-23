@@ -10,7 +10,7 @@ const {SessionModel} = require('../models/session');
 router.get('/', (req, res) => {
     SessionModel
         .find()
-        .populate('instructors preWork')
+        .populate('instructor preWork')
         .exec()
         .then(sessions => {
             res.json({
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 router.get('/admin/:admin', (req, res) => {
     ScheduleModel
         .find({"admin._id": mongoose.Types.ObjectId(req.params.admin)})
-        .populate('instructors preWork')
+        .populate('instructor preWork')
         .exec()
         .then(sessions => {
             res.json({
@@ -46,6 +46,7 @@ router.get('/admin/:admin', (req, res) => {
 router.get('/:id', (req, res) => {
     SessionModel
         .findById(req.params.id)
+        .populate('instructors preWork')
         .exec()
         .then(session => res.json(session.apiRepr()))
         .catch(err => {
@@ -55,7 +56,7 @@ router.get('/:id', (req, res) => {
 });
 //Create new sessions
 router.post('/', jsonParser, (req, res) => {
-    const requiredFields = ['title', 'instructors', 'startTime', 'endTime', 'preWork'];
+    const requiredFields = ['title', 'instructor', 'startTime', 'endTime', 'preWork'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -67,7 +68,7 @@ router.post('/', jsonParser, (req, res) => {
     SessionModel
     .create({
         title: req.body.title,
-        instructors: req.body.instructors,
+        instructor: req.body.instructor,
         startTime: req.body.startTime,
         endTime: req.body.endTime,
         preWork: req.body.preWork})

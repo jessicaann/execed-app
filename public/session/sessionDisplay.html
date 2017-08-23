@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Executive Education App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="../css/main.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+<!--Dashboard-->
+<div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand username" href="#">Welcome, <span>NAME</span></a>
+        </div>
+        <!--<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Settings</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+        </div>
+    </nav>
+</div>
+   
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="heading">Admin</li>
+            <li><a href="../admin/admins.html">My admins</a></li>
+            <li><a href="../admin/newAdmin.html">Create new admin</a></li>
+            <li><a href="../admin/admin_edit_remove.html">Edit admin</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="heading">Schedules</li>
+            <li class="active"><a href="../admin/dashboard.html">My schedules<span class="sr-only">(current)</span></a></li>
+            <li><a href="../schedule/newSchedule.html">Create new schedule</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="heading">Users</li>
+            <li><a href="">My users</a></li>
+            <li><a href="">My user groups</a></li>
+            <li><a href="">Create a new user</a></li>
+            <li><a href="">Create a user group</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="heading">Files</li>
+            <li><a href="../file/files.html">All files</a></li>
+            <li><a href="../file/newfiles.html">Add files to library</a></li>
+            <li><a href="../file/file_edit_remove.html">Edit/remove files</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="heading">Instructors</li>
+            <li><a href="../instructor/instructors.html">My instructors</a></li>
+            <li><a href="../instructor/newInstructor.html">Add instructors</a></li>
+            <li><a href="../instructor/instructor_edit_remove.html">Edit/remove instructors</a></li>  
+          </ul> 
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header scheduleTitle">Session Title</h1>
+            <div class="sessionDisplay">
+            <div class="sessionItem">
+                <p>Title:</p>
+                <p>Instructor(s):</p>
+                <p>Time: Start Time to End Time</p>
+                <p>Prework:</p>
+            </div>
+            </div>
+            <div>
+                <a href="session_edit_remove.html" class="btn btn-info btn-lg btn-primary" role="button">Edit Session</a>
+                <div class="return"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+	<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
+    <script type="text/javascript" src="../js/session/sessionDisplay.js"></script>
+</body>
+</html>

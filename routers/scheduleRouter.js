@@ -30,13 +30,13 @@ router.get('/:id', (req, res) => {
     ScheduleModel
         .findById(req.params.id)
         .populate({
-            path:"sessions"
+            path:"sessions",
+            populate: {
+                path: 'instructors preWork',
+            }
         })
         .exec()
         .then(schedule => {
-            schedule.sessions = schedule.sessions.map(session => {
-                return session.apiRepr();
-            });
             return res.json(schedule.apiRepr());
         })
         .catch(err => {
@@ -49,6 +49,12 @@ router.get('/:id', (req, res) => {
 router.get('/admin/:admin', (req, res) => {
     ScheduleModel
         .find({"admin": mongoose.Types.ObjectId(req.params.admin)})
+        .populate({
+            path:"sessions",
+            populate: {
+                path: 'instructors preWork',
+            }
+        })
         .exec()
         .then(schedules => {
             res.json({

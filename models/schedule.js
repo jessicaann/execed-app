@@ -15,11 +15,12 @@ const scheduleSchema = mongoose.Schema({
 });
 //Schedule API Reveal
 scheduleSchema.methods.apiRepr = function(){
+    const sessions = this.sessions.map(session => session.apiRepr());
     return {
         id: this.id,
         dates: this.dates,
         title: this.title,
-        sessions: this.sessions,
+        sessions: sessions,
         admin: this.admin
     };
 }
