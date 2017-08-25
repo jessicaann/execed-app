@@ -21,7 +21,7 @@ function getSchedules(successCallback) {
       $(".scheduleDates").text(`${response.dates}`);
       var sessionsElements = '';
       var instructorNames = [];
-      var preWorkTitles = '';
+      var preWorkTitles = [];
     if(response.sessions) {
         response.sessions.forEach(function(session) {
             let startTime = new Date(session.startTime);
@@ -29,15 +29,18 @@ function getSchedules(successCallback) {
                 instructorNames.push(instructor.instructorName);
             })
             session.preWork.forEach(function(preWork){
-                preWorkTitles += `<p>Prework: ${preWork.title}</p>`;
+                preWorkTitles.push(preWork.title);
             })
-            sessionsElements += `<a href="../session/sessionDisplay.html?sessionId=${session.id}" class="js-edit">
-                <div class="scheduleItem">
+            sessionsElements += 
+                `<div class="scheduleItem">
+                <div class="detail">
+                    <a href="../session/sessionDisplay.html?sessionId=${session.id}" class="detailBtn btn btn-info btn-sm">Session Details</a>
+                </div>
                 <p>ID: ${session.id}</p>
                 <p>Title: ${session.title}</p>
-                <p>Instructors: ${instructorNames.join(', ')}</p>
                 <p>Time: ${startTime.getHours()}:${startTime.getMinutes()} - ${session.endTime}</p>
-                ${preWorkTitles}
+                <p>Instructors: ${instructorNames.join(', ')}</p>
+                <p>Prework: ${preWorkTitles.join(', ')}</p>
             </div>
             </a>`;
         })

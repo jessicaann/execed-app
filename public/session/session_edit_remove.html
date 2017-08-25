@@ -69,37 +69,66 @@
           </ul> 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header scheduleTitle">Schedule Title</h1>
-            <h3 class="scheduleDates">Dates</h3>
-            <div class="schedulesDisplay">
-            <div class="scheduleItem">
-                <p>ID: 86769987877997973</p>
-                <p>Title:</p>
-                <p>Instructor:</p>
-                <p>Time: Start Time to End Time</p>
-                <p>Prework</p>
-            </div>
-            <div class="scheduleItem">
-                <p>ID: 86769987877997973</p>
-                <p>Title:</p>
-                <p>Instructor:</p>
-                <p>Time: Start Time to End Time</p>
-                <p>Prework</p>
-            </div>
-            <div class="scheduleItem">
-                <div class="detail">
-                    <a href="../session/sessionDisplay.html?sessionId=${session.id}" class="detailBtn btn btn-info btn-sm">Session Details</a>
+          <h1 class="page-header">Edit/Remove Session</h1>
+          <div class="editSession">
+              <form method="post" action="/sessions" class="editSessionForm form-horizontal">
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="title" placeholder="Title" value="" required autofocus>
+                    </div>
                 </div>
-                <p>ID: 86769987877997973</p>
-                <p>Title:</p>
-                <p>Instructor:</p>
-                <p>Time: Start Time to End Time</p>
-                <p>Prework</p>
-            </div>
-            </div>
-            <div>
-                <a href="schedule_edit_remove.html" class="btn btn-info btn-lg btn-primary" role="button">Edit Schedule</a>
-            </div>
+                <div class="form-group">
+                    <label for="startTime" class="col-sm-2 col-form-label">Start Time</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="datetime-local" id="startTime" placeholder="" value="" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="endTime" class="col-sm-2 col-form-label">End Time</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="datetime-local" id="endTime" placeholder="" value="" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="currentInstructors" class="col-sm-2 col-form-label">Current Instructor</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="currentInstructors" placeholder="Current Instructor" value="" readonly>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="instructors" class="col-sm-2 col-form-label">Instructor(s)</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="instructors" id="instructors" multiple>
+                        <option value="Instructor Name 1">Instructor Name 1</option>
+                        <option value="Instructor Name 2">Instructor Name 2</option>
+                        <option value="Instructor Name 3">Instructor Name 3</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="currentPrework" class="col-sm-2 col-form-label">Current Prework</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="currentPrework" placeholder="Current Prework" value="" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prework" class="col-sm-2 col-form-label">Prework</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="prework" id="prework" multiple>
+                        <option value="Instructor Name 1">Prework Name 1</option>
+                        <option value="Instructor Name 2">Prework Name 2</option>
+                        <option value="Instructor Name 3">Prework Name 3</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-lg btn-warning delete" type="submit">Delete Admin</button> 
+                    <button class="btn btn-lg btn-primary" type="submit">Save Changes</button>
+                </div>
+                
+              </form>
+          </div>
           </div>
         </div>
     </div>
@@ -108,6 +137,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/config.js"></script>
-    <script type="text/javascript" src="../js/schedule/scheduleDisplay.js"></script>
+    <script type="text/javascript" src="../js/session/editSession.js"></script>
 </body>
 </html>

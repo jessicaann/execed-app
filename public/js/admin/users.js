@@ -17,8 +17,8 @@ function getUsers(successCallback) {
 // Display users
   function displayUsers (response) {
       var transElement = '';
-    if(response.users) {
-        response.users.forEach(function(user) {
+    if(response) {
+        response.forEach(function(user) {
             transElement += `<a href="./user_edit_remove.html?userId=${user.id}" class="col-xs-6 col-sm-3 placeholder js-edit">
             <img class="img-responsive" src="../img/defaultavatar.png" width="200" height="200">
             <h4>${user.fullName}</h4>

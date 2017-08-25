@@ -24,10 +24,10 @@ sessionSchema.methods.apiRepr = function(){
     return {
         id: this.id,
         title: this.title,
-        instructors: this.instructors.map(instructor => instructor.apiRepr()),
+        instructors: this.instructors !== null ? this.instructors.map(instructor => instructor.apiRepr()) : [],
         startTime: this.startTime,
         endTime: this.endTime,
-        preWork: this.preWork.map(file => file.apiRepr())
+        preWork: this.preWork !== null ? this.preWork.map(file => file.apiRepr()) : []
     };
 }
 

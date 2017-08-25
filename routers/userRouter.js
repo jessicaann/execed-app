@@ -48,12 +48,10 @@ router.delete('/session', (req, res) => {
 router.get('/', (req, res) => {
     UserModel
         .find()
+        
         .exec()
         .then(users => {
-            res.json({
-                users: users.map(
-                (user) => user.apiRepr())
-            });
+            res.json( users.map(user => user.simpleApiRepr()) );
     })
     .catch(
       err => {
@@ -66,6 +64,15 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     UserModel
         .findById(req.params.id)
+        .populate({
+            path: "schedules",
+            populate: {
+                path: 'sessions',
+                populate: {
+                    path: 'instructors preWork'
+                }
+            }
+        })
         .exec()
         .then(user => res.json(user.apiRepr()))
         .catch(err => {
@@ -79,6 +86,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/schedules', (req, res) => {
    UserModel
         .find({"_id": mongoose.Types.ObjectId(req.params.id)}, {schedules: 1})
+        .populate('schedules')
         .exec()
         .then(users => {
             res.json({

@@ -17,23 +17,28 @@ function getSession(successCallback) {
   }
 // Display Session
   function displaySession (response) {
+      console.log(response);
       $(".sessionTitle").text(`${response.title}`);
       var sessionsElements = '';
-    if(response.sessions) {
-        response.sessions.forEach(function(session) {
-            sessionsElements += `<a href="../session/sessionDisplay.html?sessionId=${session.
-            _id}" class="js-edit">
+      var instructorNames = [];
+      var preWorkTitles = [];
+    if(response) {
+            response.instructors.forEach(function(instructor){
+                instructorNames.push(instructor.instructorName);
+            })
+            response.preWork.forEach(function(preWork){
+                preWorkTitles.push(preWork.title);
+            })
+            sessionsElements += `
                 <div class="sessionItem">
-                <p>ID: ${session.
-            id}</p>
-                <p>Title: ${session.title}</p>
-                <p>Instructor: ${session.instructor.instructorName}</p>
-                <p>Time: ${session.startTime} - ${session.endTime}</p>
-                <p>Prework: ${session.preWork.title}</p>
-            </div>
-            </a>`;
-        })
-    }
+                <p>ID: ${response.id}</p>
+                <p>Title: ${response.title}</p>
+                <p>Time: ${response.startTime} - ${response.endTime}</p>
+                <p>Instructor: ${instructorNames.join(', ')}</p>
+                <p>Prework: ${preWorkTitles.join(', ')}</p>
+            </div>`;
+        $('.editBtn').attr('href', `session_edit_remove.html?sessionId=${response.id}`);
+        }
     $(".sessionDisplay").html(sessionsElements);
   }
 function returnBtn(){
@@ -43,6 +48,7 @@ function returnBtn(){
         history.back();
     })
 }
+
 function displayName(){
     $('.username span').text(localStorage.getItem('adminName'));
 }

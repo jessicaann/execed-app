@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
         .populate({
             path:"sessions",
             populate: {
-                path: 'instructors preWork',
+                path: 'instructors preWork'
             }
         })
         .exec()

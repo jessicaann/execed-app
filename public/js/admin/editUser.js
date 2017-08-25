@@ -20,6 +20,7 @@ $(getUsers(displayUsers));
 
 function displayUsers(response){
     const {email, firstName, lastName, schedules} = response;
+    console.log(response.schedules);
     $('#firstName').val(firstName);
     $('#email').val(email);
     $('#lastName').val(lastName);
@@ -33,12 +34,14 @@ $(".editUserForm").submit(function(event) {
     const lastName = $(".editUserForm #lastName").val();
     const email = $(".editUserForm #email").val();
     const password = $(".editUserForm #password").val();
-    const schedules = function() {
-        if(){ return $(".editUserForm #schedules").val();
+    console.log($(".editUserForm #schedules").val());
+    /*const schedules = function() {
+        if($(".editUserForm #schedules").val() !== "") { return $(".editUserForm #schedules").val();
     } else{
        return $(".editUserForm #currentSchedule").val();
-    }
-};//can I set this to the current schedule if there is not value in this one?
+    } 
+};*/
+//can I set this to the current schedule if there is not value in this one?
     
     var getUserSettings = {
       url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),
@@ -89,6 +92,7 @@ function displayName(){
 //Watch Page Load
 function watchPageLoad() {
     displayName();
+    getUsers(displayUsers);
 }
 
 $(watchPageLoad);

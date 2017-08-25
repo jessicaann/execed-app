@@ -22,3 +22,11 @@ tr.js-edit:hover {
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
 }
+.detail{
+    position:inherit;
+    float: right;
+    padding: 1em;
+}
+.detailBtn {
+    position: relative;
+}
