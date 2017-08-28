@@ -25,8 +25,30 @@ function getSchedules(successCallback) {
     if(response.sessions) {
         response.sessions.forEach(function(session) {
             let startTime = new Date(session.startTime);
-            session.instructors.forEach(function(instructor){
-                instructorNames.push(instructor.instructorName);
+            let endTime = new Date(session.endTime);
+            const startMinutes = function() {
+                if (startTime.getMinutes() == 0) {
+                return '00';
+                }
+                if (startTime.getMinutes() <10) {
+                    return '0'+startTime.getMinutes().slice(-2);
+                }
+                else {
+                    return startTime.getMinutes();
+                }
+            }
+            const endMinutes = function() {
+                if (endTime.getMinutes() == 0) {
+                return '00';
+                }
+                if (endTime.getMinutes() <10) {
+                    return '0'+endTime.getMinutes().slice(-2);
+                }
+                else {
+                    return endTime.getMinutes();
+                }
+            }
+            session.instructors.forEach(function(instructor){ instructorNames.push(instructor.instructorName);
             })
             session.preWork.forEach(function(preWork){
                 preWorkTitles.push(preWork.title);
@@ -38,7 +60,7 @@ function getSchedules(successCallback) {
                 </div>
                 <p>ID: ${session.id}</p>
                 <p>Title: ${session.title}</p>
-                <p>Time: ${startTime.getHours()}:${startTime.getMinutes()} - ${session.endTime}</p>
+                <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                 <p>Instructors: ${instructorNames.join(', ')}</p>
                 <p>Prework: ${preWorkTitles.join(', ')}</p>
             </div>

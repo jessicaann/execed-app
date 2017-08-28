@@ -17,8 +17,7 @@ function getSessions(successCallback) {
   }
 
 function displaySessions(response){
-    const {title, startTime, endTime, instructors, preWork} = response;
-    console.log(response);
+    const {title, instructors, preWork} = response;
     var instructorsNames = [];
     var preWorkTitles = [];
     instructors.forEach(function(instructor){
@@ -27,12 +26,35 @@ function displaySessions(response){
     preWork.forEach(function(preWork){
                 preWorkTitles.push(preWork.title);
             });
-    
+    let startTime = new Date(response.startTime);
+    let endTime = new Date(response.endTime);
+    const startMinutes = function() {
+                if (startTime.getMinutes() == 0) {
+                return '00';
+                }
+                if (startTime.getMinutes() <10) {
+                    return '0'+startTime.getMinutes().slice(-2);
+                }
+                else {
+                    return startTime.getMinutes();
+                }
+            }
+            const endMinutes = function() {
+                if (endTime.getMinutes() == 0) {
+                return '00';
+                }
+                if (endTime.getMinutes() <10) {
+                    return '0'+endTime.getMinutes().slice(-2);
+                }
+                else {
+                    return endTime.getMinutes();
+                }
+            }
+            const startTimeVar = startTime.getHours() + ':' + startMinutes();
+    //help with filling the dates and times
     $('#title').val(title);
-    $('#startTime').val(startTime); //can it fill a date/local input?
+    $('#startTime').val(startTimeVar);
     $('#endTime').val(endTime);
-    $('#currentInstructors').val(instructorsNames.join(", "));
-    $('#currentPrework').val(preWorkTitles.join(", "));
     
     getInstructors(displayInstructors, instructors);
     getPrework(displayPrework, preWork)
@@ -41,26 +63,20 @@ function displaySessions(response){
 $(".editSessionForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
-    const firstName = $(".editSessionForm #firstName").val();
-    const lastName = $(".editSessionForm #lastName").val();
-    const email = $(".editSessionForm #email").val();
-    const password = $(".editSessionForm #password").val();
-    console.log($(".editSessionForm #schedules").val());
-    /*const schedules = function() {
-        if($(".editSessionForm #schedules").val() !== "") { return $(".editSessionForm #schedules").val();
-    } else{
-       return $(".editSessionForm #currentSchedule").val();
-    } 
-};*/
-//can I set this to the current schedule if there is not value in this one?
+    const title = $(".editSessionForm #title").val().trim();
+    const startTime = $(".editSessionForm #startTime").val();
+    const endTime = $(".editSessionForm #endTime").val();
+    const instructors = $(".editSessionForm #instructors").val();
+    const preWork = $(".editSessionForm #prework").val();
     
     var getSessionSettings = {
-      url: BASE_URL + "/sessions/profile/" + localStorage.getItem('editSessionId'),
+      url: BASE_URL + "/sessions/" + localStorage.getItem('editSessionId'),
       data: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
+        title: title,
+        startTime: startTime,
+        endTime: endTime,
+        instructors: instructors,
+        preWork: preWork,
         id: localStorage.getItem('editSessionId')
       }),
       dataType: "json",
@@ -69,7 +85,7 @@ $(".editSessionForm").submit(function(event) {
         },
       method: "PUT",
       success: function(response){
-          console.log("It's a miracle:", response);
+          console.log(response);
       }
     }
     $.ajax(getSessionSettings);
@@ -112,7 +128,7 @@ function displayInstructors (response, instructorsList) {
     $('#instructors').html(transElement);
 }
 //get preworks
-function getPrework(successCallback) {
+function getPrework(successCallback, preworkList) {
     var getPreworkSettings = {
       url: BASE_URL + "/files",
       data: JSON.stringify({}),
@@ -123,18 +139,27 @@ function getPrework(successCallback) {
       method: "GET",
       success: function(res){
           console.log(res);
-          successCallback(res);
+          successCallback(res, preworkList);
       }
     }
     $.ajax(getPreworkSettings);
   }
 // Display prework in dropdown
-  function displayPrework (response) {
-     console.log(response);
-      var transElement = '';
+  function displayPrework (response, preworkList) {
+     var transElement = '';
     if(response.files) {
         response.files.forEach(function(file) {
-            transElement += `<option value="${file.id}">${file.title}</option>`;
+            let isSelected = false;
+            preworkList.forEach(function(_preWork){
+                if(file.id === _preWork.id){
+                   isSelected = true;
+                }
+            })
+            if(isSelected){
+                transElement += `<option selected value="${file.id}">${file.title}</option>`;
+            }else{
+                transElement += `<option value="${file.id}">${file.title}</option>`;
+            }
         })
     }
     $('#prework').html(transElement);
@@ -144,7 +169,7 @@ $(".delete").click(function(event) {
     event.preventDefault();
  
     var getSessionSettings = {
-      url: BASE_URL + "/sessions/profile/" + localStorage.getItem('editSessionId'),
+      url: BASE_URL + "/sessions/" + localStorage.getItem('editSessionId'),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
