@@ -11,10 +11,20 @@ function getSessions(successCallback) {
       method: "GET",
       success: function(res){
           successCallback(res);
+          console.log(res);
       }
     }
     $.ajax(getSessionSettings);
   }
+
+
+function leadZeros(value){
+    return ('0' + value).slice(-2)
+}
+
+function formatDate(date){
+    return date.getFullYear()+'-'+leadZeros(date.getMonth()+1)+'-'+leadZeros(date.getDate())+'T'+leadZeros(date.getHours())+':'+leadZeros(date.getMinutes());
+}
 
 function displaySessions(response){
     const {title, instructors, preWork} = response;
@@ -28,33 +38,13 @@ function displaySessions(response){
             });
     let startTime = new Date(response.startTime);
     let endTime = new Date(response.endTime);
-    const startMinutes = function() {
-                if (startTime.getMinutes() == 0) {
-                return '00';
-                }
-                if (startTime.getMinutes() <10) {
-                    return '0'+startTime.getMinutes().slice(-2);
-                }
-                else {
-                    return startTime.getMinutes();
-                }
-            }
-            const endMinutes = function() {
-                if (endTime.getMinutes() == 0) {
-                return '00';
-                }
-                if (endTime.getMinutes() <10) {
-                    return '0'+endTime.getMinutes().slice(-2);
-                }
-                else {
-                    return endTime.getMinutes();
-                }
-            }
-            const startTimeVar = startTime.getHours() + ':' + startMinutes();
+    console.log(startTime.toLocaleString());
+    const startTimeVar = formatDate(startTime);
+    const endTimeVar = formatDate(endTime);
     //help with filling the dates and times
     $('#title').val(title);
     $('#startTime').val(startTimeVar);
-    $('#endTime').val(endTime);
+    $('#endTime').val(endTimeVar);
     
     getInstructors(displayInstructors, instructors);
     getPrework(displayPrework, preWork)
@@ -73,8 +63,8 @@ $(".editSessionForm").submit(function(event) {
       url: BASE_URL + "/sessions/" + localStorage.getItem('editSessionId'),
       data: JSON.stringify({
         title: title,
-        startTime: startTime,
-        endTime: endTime,
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
         instructors: instructors,
         preWork: preWork,
         id: localStorage.getItem('editSessionId')

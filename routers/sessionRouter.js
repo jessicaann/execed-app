@@ -89,7 +89,7 @@ router.put('/:id', jsonParser, (req, res) => {
     res.status(400).json({message: message});
   }
     const toUpdate = {};
-    const updateablefields = ['title', 'instructor', 'startTime', 'endTime', 'preWork'];
+    const updateablefields = ['title', 'instructors', 'startTime', 'endTime', 'preWork'];
     
     updateablefields.forEach(field => {
         if (field in req.body) {
