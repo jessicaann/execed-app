@@ -25,6 +25,15 @@ scheduleSchema.methods.apiRepr = function(){
         admin: this.admin
     };
 }
+scheduleSchema.methods.apiCreatedRepr = function(){
+    return {
+        id: this.id,
+        dates: this.dates,
+        title: this.title,
+        sessions: this.sessions,
+        admin: this.admin
+    };
+}
 
 const ScheduleModel = mongoose.model('Schedule', scheduleSchema);
 module.exports = {ScheduleModel};

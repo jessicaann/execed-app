@@ -85,7 +85,7 @@ router.post('/', jsonParser, (req, res) => {
         sessions: req.body.sessions,
         admin: req.body.admin})
     .then(
-    schedule => res.status(201).json(schedule.apiRepr()))
+    schedule => res.status(201).json(schedule.apiCreatedRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});

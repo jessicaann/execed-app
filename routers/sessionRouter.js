@@ -10,7 +10,7 @@ const {SessionModel} = require('../models/session');
 router.get('/', (req, res) => {
     SessionModel
         .find()
-        .populate('instructor preWork')
+        .populate('instructors preWork')
         .exec()
         .then(sessions => {
             res.json({
@@ -56,7 +56,7 @@ router.get('/:id', (req, res) => {
 });
 //Create new sessions
 router.post('/', jsonParser, (req, res) => {
-    const requiredFields = ['title', 'instructor', 'startTime', 'endTime', 'preWork'];
+    const requiredFields = ['title', 'instructors', 'startTime', 'endTime', 'preWork'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -68,12 +68,14 @@ router.post('/', jsonParser, (req, res) => {
     SessionModel
     .create({
         title: req.body.title,
-        instructor: req.body.instructor,
+        instructors: req.body.instructors,
         startTime: req.body.startTime,
         endTime: req.body.endTime,
         preWork: req.body.preWork})
     .then(
-    session => res.status(201).json(session.apiRepr()))
+    session => {
+        res.status(201).json(session.apiCreatedRepr())
+    })
     .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});

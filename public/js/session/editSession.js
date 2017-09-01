@@ -74,9 +74,14 @@ $(".editSessionForm").submit(function(event) {
             "content-type": "application/json"
         },
       method: "PUT",
+      error: function(response){
+        var transElement = 
+        `<div class="negative-msg-display">Unable to update session</div>`;
+        $(".msg-display").html(transElement);},
       success: function(response){
-          console.log(response);
-      }
+        var transElement = 
+        `<div class="positive-msg-display">Session updated</div>`;
+        $(".msg-display").html(transElement);}
     }
     $.ajax(getSessionSettings);
 })
@@ -157,7 +162,7 @@ function getPrework(successCallback, preworkList) {
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
- 
+    confirm('Delete this item?');
     var getSessionSettings = {
       url: BASE_URL + "/sessions/" + localStorage.getItem('editSessionId'),
       data: JSON.stringify({}),

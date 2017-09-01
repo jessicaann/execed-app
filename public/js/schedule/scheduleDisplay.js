@@ -66,6 +66,7 @@ function getSchedules(successCallback) {
             </div>
             </a>`;
         })
+        $('.editSchedBtn').attr('href', `schedule_edit_remove.html?scheduleId=${response.id}`);
     }
     $(".schedulesDisplay").html(sessionsElements);
   }

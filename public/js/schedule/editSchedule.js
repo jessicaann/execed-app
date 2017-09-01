@@ -1,36 +1,69 @@
-$(".newScheduleForm").submit(function(event) {
+//do the call that gets the schedule info and populates it into the form based on the email on page load
+function getSchedules(successCallback) {
+    localStorage.setItem('editScheduleId', location.search.split("?")[1].split("=")[1]);
+    var getScheduleSettings = {
+      url: BASE_URL + "/schedules/" + localStorage.getItem('editScheduleId'),
+      data: JSON.stringify({}),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "GET",
+      success: function(res){
+          successCallback(res);
+          console.log(res);
+      }
+    }
+    $.ajax(getScheduleSettings);
+  }
+
+function displaySchedules(response){
+    const {title, dates, sessions} = response;
+    var sessionTitles = [];
+    sessions.forEach(function(session){
+                sessionTitles.push(session.title);
+            });
+
+    $('#title').val(title);
+    $('#dates').val(dates);
+    $('#sessions').val(sessionTitles);
+    
+    getSessions(displaySessions, sessions);
+}
+
+$(".editScheduleForm").submit(function(event) {
     event.preventDefault();
     //get the info from the input
-    const title= $(".newScheduleForm #title").val().trim();
-    const dates = $(".newScheduleForm #dates").val().trim();
-    const admin = localStorage.getItem('adminId');
-    const sessions = $(".newScheduleForm #sessions").val();
-    console.log(sessions);
+    const title = $(".editScheduleForm #title").val().trim();
+    const dates = $(".editScheduleForm #dates").val();
+    const sessions = $(".editScheduleForm #sessions").val();
+    
     var getScheduleSettings = {
-      url: BASE_URL + "/schedules",
+      url: BASE_URL + "/schedules/" + localStorage.getItem('editScheduleId'),
       data: JSON.stringify({
         title: title,
         dates: dates,
-        admin: admin,
-        sessions: sessions
+        sessions: sessions,
+        id: localStorage.getItem('editScheduleId')
       }),
       dataType: "json",
-      headers: {
+        headers: {
             "content-type": "application/json"
         },
-      method: "POST",
+      method: "PUT",
       error: function(response){
         var transElement = 
-        `<div class="negative-msg-display">Unable to create schedule</div>`;
+        `<div class="negative-msg-display">Unable to update schedule</div>`;
         $(".msg-display").html(transElement);},
-      success: function(res){var transElement = 
-            `<div class="positive-msg-display">Schedule created</div>`;
-            $(".msg-display").html(transElement);}
-      }
+      success: function(response){
+        var transElement = 
+        `<div class="positive-msg-display">Schedule updated</div>`;
+        $(".msg-display").html(transElement);}
+    }
     $.ajax(getScheduleSettings);
 })
 
-function getSessions(successCallback) {
+function getSessions(successCallback, sessionsList) {
     var getSessionSettings = {
       url: BASE_URL + "/sessions",
       data: JSON.stringify({}),
@@ -41,22 +74,52 @@ function getSessions(successCallback) {
       method: "GET",
       success: function(res){
           console.log(res);
-          successCallback(res);
+          successCallback(res, sessionsList);
       }
     }
     $.ajax(getSessionSettings);
   }
-// Display sessions in dropdown
-  function displaySessions (response) {
-     console.log(response);
-      var transElement = '';
+// Display Sessions
+function displaySessions (response, sessionsList) {
+    var transElement = '';
     if(response.sessions) {
         response.sessions.forEach(function(session) {
-            transElement += `<option value="${session.id}">${session.title}</option>`;
+            let isSelected = false;
+            sessionsList.forEach(function(_session){
+                if(session.title === _session.title){
+                   isSelected = true;
+                }
+            })
+            if(isSelected){
+                transElement += `<option selected value="${session.id}">${session.title}</option>`;
+            }else{
+                transElement += `<option value="${session.id}">${session.title}</option>`;
+            }
         })
     }
     $('#sessions').html(transElement);
-  }
+}
+//delete call
+$(".delete").click(function(event) {
+    event.preventDefault();
+    confirm('Delete this item?');
+    var getScheduleSettings = {
+      url: BASE_URL + "/schedules/" + localStorage.getItem('editScheduleId'),
+      data: JSON.stringify({}),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "DELETE",
+      success: function(response){
+          console.log("Item removed", response);
+          var transElement = 
+            `<div class="itemdeleted">Schedule removed</div>`;
+            $(".editSchedule").html(transElement);
+      }
+    }
+    $.ajax(getScheduleSettings);
+})
 
 $(".newSessionBtn").click(function(event) {
     event.preventDefault();
@@ -68,6 +131,10 @@ $(".cancel").click(function(event) {
     event.preventDefault();
     $('.newSession').addClass('hidden');
 })
+
+function displayName(){
+    $('.username span').text(localStorage.getItem('adminName'));
+}
 //get instructors
 function getInstructors(successCallback) {
     var getInstructorSettings = {
@@ -166,14 +233,10 @@ $(".newSessionForm").submit(function(event) {
       }
     $.ajax(getScheduleSettings);
 })
-function displayName(){
-    $('.username span').text(localStorage.getItem('adminName'));
-}
-
 //Watch Page Load
 function watchPageLoad() {
     displayName();
-    getSessions(displaySessions);
+    getSchedules(displaySchedules);
 }
 
 $(watchPageLoad);

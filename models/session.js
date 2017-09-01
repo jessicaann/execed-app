@@ -21,6 +21,7 @@ const sessionSchema = mongoose.Schema({
 });
 //Session API Reveal
 sessionSchema.methods.apiRepr = function(){
+    console.log(this.preWork);
     return {
         id: this.id,
         title: this.title,
@@ -28,6 +29,16 @@ sessionSchema.methods.apiRepr = function(){
         startTime: this.startTime,
         endTime: this.endTime,
         preWork: this.preWork !== null ? this.preWork.map(file => file.apiRepr()) : []
+    };
+}
+sessionSchema.methods.apiCreatedRepr = function(){
+    return {
+        id: this.id,
+        title: this.title,
+        instructors: this.instructors,
+        startTime: this.startTime,
+        endTime: this.endTime,
+        preWork: this.preWork
     };
 }
 
