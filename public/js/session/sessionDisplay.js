@@ -17,12 +17,35 @@ function getSession(successCallback) {
   }
 // Display Session
   function displaySession (response) {
-      console.log(response);
       $(".sessionTitle").text(`${response.title}`);
       var sessionsElements = '';
       var instructorNames = [];
       var preWorkTitles = [];
     if(response) {
+        let startTime = new Date(response.startTime);
+        let endTime = new Date(response.endTime);
+        const startMinutes = function() {
+            if (startTime.getMinutes() == 0) {
+            return '00';
+            }
+            if (startTime.getMinutes() <10) {
+                return '0'+startTime.getMinutes().slice(-2);
+            }
+            else {
+                return startTime.getMinutes();
+            }
+        }
+        const endMinutes = function() {
+            if (endTime.getMinutes() == 0) {
+            return '00';
+            }
+            if (endTime.getMinutes() <10) {
+                return '0'+endTime.getMinutes().slice(-2);
+            }
+            else {
+                return endTime.getMinutes();
+            }
+        }
             response.instructors.forEach(function(instructor){
                 instructorNames.push(instructor.instructorName);
             })
@@ -33,7 +56,7 @@ function getSession(successCallback) {
                 <div class="sessionItem">
                 <p>ID: ${response.id}</p>
                 <p>Title: ${response.title}</p>
-                <p>Time: ${response.startTime} - ${response.endTime}</p>
+                <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                 <p>Instructor: ${instructorNames.join(', ')}</p>
                 <p>Prework: ${preWorkTitles.join(', ')}</p>
             </div>`;

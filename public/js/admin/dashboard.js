@@ -31,6 +31,11 @@ function getSchedules(successCallback) {
     }
     $(".schedulesDisplay").html(transElement);
   }
+  
+  $(".nav a").on("click", function() {
+    $(".nav").find(".active").removeClass("active");
+    $(this).parent().addClass("active");
+  });
 
 function displayName(){
     $('.username span').text(localStorage.getItem('adminName'));

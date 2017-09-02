@@ -17,17 +17,16 @@ function getFiles(successCallback) {
 // Display files
   function displayFiles (response) {
       var transElement = '';
+      console.log(response);
     if(response.files) {
         response.files.forEach(function(file) {
             transElement += 
-            `<a href="./file_edit_remove.html?fileId=${file.id}">
-                <tr class="js-edit">
-                    <td>${file.title}</td>
-                    <td>${file.authorName}</td>
-                    <td>${file.yearPublished}</td>
-                    <td>${file.file}</td>
-                </tr>
-             </a>`;
+            `<tr class="js-edit">
+                <td><a href="${file.file}" download>${file.title}</a></td>
+                <td>${file.author}</td>
+                <td>${file.yearPublished}</td>
+                <td><a href="../file/file_edit_remove.html?fileId=${file.id}">Edit</a></td>
+             </tr>`;
         })
     }
     $(".filesDisplay").html(transElement);

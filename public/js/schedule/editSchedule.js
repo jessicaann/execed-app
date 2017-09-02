@@ -102,7 +102,10 @@ function displaySessions (response, sessionsList) {
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
-    confirm('Delete this item?');
+    var deleteConfirm = confirm('Delete this item?');
+    if (!deleteConfirm) {
+        return
+    }
     var getScheduleSettings = {
       url: BASE_URL + "/schedules/" + localStorage.getItem('editScheduleId'),
       data: JSON.stringify({}),

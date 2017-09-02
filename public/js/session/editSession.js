@@ -162,7 +162,10 @@ function getPrework(successCallback, preworkList) {
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
-    confirm('Delete this item?');
+    var deleteConfirm = confirm('Delete this item?');
+    if (!deleteConfirm) {
+        return
+    }
     var getSessionSettings = {
       url: BASE_URL + "/sessions/" + localStorage.getItem('editSessionId'),
       data: JSON.stringify({}),
