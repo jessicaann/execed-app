@@ -18,11 +18,12 @@ function getFiles(successCallback) {
   function displayFiles (response) {
       var transElement = '';
       console.log(response);
+
     if(response.files) {
         response.files.forEach(function(file) {
             transElement += 
             `<tr class="js-edit">
-                <td><a href="${file.file}" download>${file.title}</a></td>
+                <td><a href="${BASE_URL}/uploads/${file.file}" download>${file.title}</a></td>
                 <td>${file.author}</td>
                 <td>${file.yearPublished}</td>
                 <td><a href="../file/file_edit_remove.html?fileId=${file.id}">Edit</a></td>

@@ -23,7 +23,11 @@ function getSchedules(successCallback) {
       var instructorNames = [];
       var preWorkTitles = [];
     if(response.sessions) {
-        response.sessions.forEach(function(session) {
+        var scheduleSessions = response.sessions;
+        var sortingTest = scheduleSessions.sort(function(a, b){
+            return new Date(a.startTime) - new Date(b.startTime);
+        });
+        scheduleSessions.forEach(function(session) {
             let startTime = new Date(session.startTime);
             let endTime = new Date(session.endTime);
             const startMinutes = function() {
@@ -53,13 +57,14 @@ function getSchedules(successCallback) {
             session.preWork.forEach(function(preWork){
                 preWorkTitles.push(preWork.title);
             })
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             sessionsElements += 
                 `<div class="scheduleItem">
                 <div class="detail">
                     <a href="../session/sessionDisplay.html?sessionId=${session.id}" class="detailBtn btn btn-info btn-sm">Session Details</a>
                 </div>
-                <p>ID: ${session.id}</p>
                 <p>Title: ${session.title}</p>
+                <p>Date: ${months[startTime.getMonth()]} ${startTime.getDate()}, ${startTime.getFullYear()}
                 <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                 <p>Instructors: ${instructorNames.join(', ')}</p>
                 <p>Prework: ${preWorkTitles.join(', ')}</p>

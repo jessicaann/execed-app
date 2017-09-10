@@ -54,7 +54,6 @@ function getSession(successCallback) {
             })
             sessionsElements += `
                 <div class="sessionItem">
-                <p>ID: ${response.id}</p>
                 <p>Title: ${response.title}</p>
                 <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                 <p>Instructor: ${instructorNames.join(', ')}</p>

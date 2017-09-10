@@ -25,6 +25,16 @@ fileSchema.methods.apiRepr = function() {
         file: this.file
     };
 }
+fileSchema.methods.apiIdRepr = function() {
+    return {
+        id: this.id,
+        title: this.title,
+        authorFirstName: this.author.firstName,
+        authorLastName: this.author.lastName,
+        yearPublished: this.yearPublished,
+        file: this.file
+    };
+}
 
 const FileModel = mongoose.model('File', fileSchema);
 module.exports={FileModel};

@@ -23,6 +23,27 @@ $(".newInstructorForm").submit(function(event) {
     $.ajax(getInstructorSettings);
 })
 
+$(".logout").click(function(event) {
+    event.preventDefault();
+    //delete the admin's session
+    const adminId = localStorage.getItem('adminId');
+    var getLogoutSettings = {
+      url: BASE_URL + "/admins/session",
+      data: JSON.stringify({
+        email: email,
+        password: password
+      }),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "DELETE",
+      success: function(res){
+          location.href="../logout.html";
+      }
+    }
+    $.ajax(getLogoutSettings);
+})
 function displayName(){
     $('.username span').text(localStorage.getItem('adminName'));
 }

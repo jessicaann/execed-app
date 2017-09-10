@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<!--Dashboard-->
 <div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -24,13 +23,10 @@
           </button>
           <a class="navbar-brand username" href="#">Welcome, <span>NAME</span></a>
         </div>
-        <!--<div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Settings</a></li>
+            <li class="logout"><a href="../logout.html">Log Out</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
         </div>
     </nav>
 </div>
@@ -69,13 +65,25 @@
           <h1 class="page-header">Create New Instructor</h1>
           <div>
               <div class="msg-display"></div>
-              <form method="post" action="/instructors" class="newInstructorForm">
-                <label for="firstName"></label>
-                <input type="text" id="firstName" placeholder="First Name" required autofocus>
-                <label for="lastName"></label>
-                <input type="text" id="lastName" placeholder="Last Name" required autofocus>
-                <label for="email"></label>
-                <input type="email" id="email" placeholder="Email" required autofocus>
+              <form method="post" action="/instructors" class="newInstructorForm form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="firstName">First Name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="firstName" placeholder="First Name" required autofocus>
+                      </div>
+                    </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="lastName">Last Name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="lastName" placeholder="Last Name" required autofocus>
+                      </div>
+                    </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="email">Email</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="email" id="email" placeholder="Email" required autofocus>
+                      </div>
+                    </div>
                 <button class="btn btn-lg btn-primary" type="submit">Submit</button>
               </form>
           </div>

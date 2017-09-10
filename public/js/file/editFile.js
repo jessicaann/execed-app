@@ -19,36 +19,39 @@ function getFiles(successCallback) {
 $(getFiles(displayFiles));
 
 function displayFiles(response){
-    const {email, firstName, lastName} = response;
-    $('#firstName').val(firstName);
-    $('#email').val(email);
-    $('#lastName').val(lastName);
+    const {title, yearPublished, file, authorFirstName, authorLastName} = response;
+    console.log(response);
+    $('#title').val(title);
+    $('#yearPublished').val(yearPublished );
+    $('#firstName').val(authorFirstName);
+    $('#lastName').val(authorLastName);
 }
 
 $(".newFileForm").submit(function(event) {
     event.preventDefault();
-    //get the info from the input
-    const firstName = $(".newFileForm #firstName").val();
-    const lastName = $(".newFileForm #lastName").val();
-    const yearPublished = $(".newFileForm #yearPublished").val();
-    const title = $(".newFileForm #title").val();
-    //what if we upload a file? Do we get the value and do a put or do a post?
+    const firstName = $(".newFileForm #firstName").val().trim();
+    const lastName = $(".newFileForm #lastName").val().trim();
+    const yearPublished = $(".newFileForm #yearPublished").val().trim();
+    const title = $(".newFileForm #title").val().trim();
+    const file = $(".newFileForm #file")[0].files[0];
+    const fd = new FormData();
+    
+    fd.append('firstName', firstName);
+    fd.append('lastName', lastName);
+    fd.append('yearPublished', yearPublished);
+    fd.append('title', title);
+    fd.append('file', file);
+    fd.append('id', localStorage.getItem('editFileId'));
     
     var getFileSettings = {
       url: BASE_URL + "/files/profile/" + localStorage.getItem('editFileId'),
-      data: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        yearPublished: yearPublished,
-        title: title,
-          //what about the file itself?
-        id: localStorage.getItem('editFileId')
-      }),
+      async: true,
+      data: fd,
       dataType: "json",
-        headers: {
-            "content-type": "application/json" //different type of data
-        },
       method: "PUT",
+      processData: false,
+      contentType: false,
+      mimeType: "multipart/form-data",
       error: function(response){
           console.log("Unable to save changes", response);
           var transElement = 
@@ -56,7 +59,7 @@ $(".newFileForm").submit(function(event) {
             $(".msg-display").html(transElement);
       },
       success: function(response){
-          console.log("Item removed", response);
+          console.log("Item changed", response);
           var transElement = 
             `<div class="positive-msg-display">Changes saved</div>`;
             $(".msg-display").html(transElement);
@@ -67,7 +70,10 @@ $(".newFileForm").submit(function(event) {
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
- 
+    var deleteConfirm = confirm('Delete this item?');
+    if (!deleteConfirm) {
+        return
+    }
     var getFileSettings = {
       url: BASE_URL + "/files/profile/" + localStorage.getItem('editFileId'),
       data: JSON.stringify({}),
@@ -85,8 +91,8 @@ $(".delete").click(function(event) {
       success: function(response){
           console.log("Item removed", response);
           var transElement = 
-            `<div class="positive-msg-display">File removed</div>`;
-            $(".editFile").html(transElement);
+            `<div class="positive-msg-display">File deleted</div>`;
+            $(".msg-display").html(transElement);
       }
     }
     $.ajax(getFileSettings);

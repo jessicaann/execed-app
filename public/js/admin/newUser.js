@@ -21,7 +21,7 @@ $(".newUserForm").submit(function(event) {
         },
       method: "POST",
       error: function(res){var transElement = 
-            `<div class="negative-msg-display">User already exists with this email</div>`;
+            `<div class="negative-msg-display">Cannot create user</div>`;
             $(".msg-display").html(transElement);},
       success: function(res){var transElement = 
             `<div class="positive-msg-display">User created</div>`;

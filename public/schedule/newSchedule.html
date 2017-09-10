@@ -24,14 +24,12 @@
           </button>
           <a class="navbar-brand username" href="#">Welcome, <span>NAME</span></a>
         </div>
-        <!--<div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Settings</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="logout"><a href="../logout.html">Log Out</a></li>
+            </ul>
         </div>
+      </div>
     </nav>
 </div>
    
@@ -68,46 +66,79 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Create New Schedule</h1>
               <div class="msg-display"></div>
-              <form method="post" action="/schedules" class="newScheduleForm">
-                <label for="title">Title</label>
-                <input type="text" id="title" placeholder="Title" required autofocus>
-                <label for="dates">Dates:</label>
-                <input type="text" id="dates" placeholder="Program Date(s)" required autofocus>
-                <label for="sessions">Sessions:</label>
-                <select name="sessions" id="sessions" multiple>
-                    <option value="Session Name 1">Session Name 1</option>
-                    <option value="Session Name 2">Session Name 2</option>
-                    <option value="Session Name 3">Session Name 3</option>
-                </select>
+              <form method="post" action="/schedules" class="newScheduleForm form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="title">Title</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="title" placeholder="Title" required autofocus>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="dates">Dates:</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="dates" placeholder="Program Date(s)" required autofocus>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label" for="sessions">Sessions:</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" name="sessions" id="sessions" multiple>
+                          <option value="Session Name 1">Session Name 1</option>
+                          <option value="Session Name 2">Session Name 2</option>
+                          <option value="Session Name 3">Session Name 3</option>
+                      </select>
+                    </div>
+                  </div>
                 <button class="btn btn-lg btn-primary" type="submit">Submit</button>
               </form>
             <div>
-                <button type="button" class="btn btn-info btn-lg btn-primary newSessionBtn" role="button">Create new sessions</button>
+                <button type="button" class="btn btn-info btn-med newSessionBtn" role="button">Create new sessions</button>
             </div>
             <div class="session-msg-display"></div>
             <div class="newSession hidden">
-                <form method="post" class="newSessionForm" action="/sessions">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" placeholder="Title" required autofocus>
-                    <label for="instructors">Instructors:</label>
-                    <select name="instructors" id="instructors" multiple>
-                        <option value="Instructor Name 1">Instructor Name 1</option>
-                        <option value="Instructor Name 2">Instructor Name 2</option>
-                        <option value="Instructor Name 3">Instructor Name 3</option>
-                    </select>
-                    <label for="startTime">Start Time</label>
-                    <input type="datetime-local" id="startTime" placeholder="Start Time" required autofocus>
-                    <label for="endTime">End Time</label>
-                    <input type="datetime-local" id="endTime" placeholder="End Time" required autofocus>
-                    <label for="Prework">Prework</label>
-                    <select name="prework" id="prework" multiple>
-                        <option value="Prework Name 1">Prework Name 1</option>
-                        <option value="Prework Name 2">Prework Name 2</option>
-                    </select>
+                <h1 class="page-header">Create New Session</h1>                
+                <form method="post" class="newSessionForm form-horizontal" action="/sessions">
+                  <div class="form-group">
+                      <label class="col-sm-2 col-form-label" for="title">Title</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" id="title" placeholder="Title" required autofocus>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" for="instructors">Instructors:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" name="instructors" id="instructors" multiple>
+                              <option value="Instructor Name 1">Instructor Name 1</option>
+                              <option value="Instructor Name 2">Instructor Name 2</option>
+                              <option value="Instructor Name 3">Instructor Name 3</option>
+                          </select>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" for="startTime">Start Time</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="datetime-local" id="startTime" placeholder="Start Time" required autofocus>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" for="endTime">End Time</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="datetime-local" id="endTime" placeholder="End Time" required autofocus>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label" for="Prework">Prework</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" name="prework" id="prework" multiple>
+                              <option value="Prework Name 1">Prework Name 1</option>
+                              <option value="Prework Name 2">Prework Name 2</option>
+                          </select>
+                        </div>
+                      </div>
                     <div class="btn-group">
-                    <button class="btn btn-lg btn-warning cancel" type="button">Cancel</button> 
-                    <button class="btn btn-lg btn-primary" type="submit">Create Session</button>
-                </div>
+                      <button class="btn btn-lg btn-warning cancel" type="button">Cancel</button> 
+                      <button class="btn btn-lg btn-primary" type="submit">Create Session</button>
+                    </div>
                 </form>
             </div>
           </div>

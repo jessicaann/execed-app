@@ -38,7 +38,7 @@ router.post('/session', jsonParser, (req, res) => {
     })
 })
 //Delete the Session
-router.delete('/session/:id', (req, res) => {
+router.delete('/session', (req, res) => {
     res.status(204).send
 })
 

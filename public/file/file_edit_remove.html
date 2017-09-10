@@ -24,14 +24,12 @@
           </button>
           <a class="navbar-brand username" href="#">Welcome, <span>NAME</span></a>
         </div>
-        <!--<div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Settings</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="logout"><a href="../logout.html">Log Out</a></li>
+            </ul>
         </div>
+      </div>
     </nav>
 </div>
    
@@ -68,20 +66,33 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Edit Prework Files</h1>
             <div class="msg-display"></div>
-            <form action="/files" method="post" class="newFileForm" enctype="multipart/form-data">
-                <label for="title"></label>
-                <input type="text" id="title" placeholder="File Title" value="" required autofocus>
-                <label for="yearPublished"></label>
-                <input type="text" id="yearPublished" placeholder="Year Published" value="" required autofocus>
-                <label for="firstName"></label>
-                <input type="text" id="firstName" placeholder="Author First Name" value="" required autofocus>
-                <label for="lastName"></label>
-                <input type="text" id="lastName" placeholder="Author Last Name" value="" required autofocus>
-                <label for="fileUpload"></label>
-                <input type="file" id="file" value="" required autofocus>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <form action="/files" method="post" class="newFileForm form-horizontal" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10"><input class="form-control" type="text" id="title" placeholder="File Title" value="" required autofocus></div>
+              </div>
+                <div class="form-group">
+                  <label for="yearPublished" class="col-sm-2 col-form-label">Year Published</label>
+                  <div class="col-sm-10"><input class="form-control" type="text" id="yearPublished" placeholder="Year Published" value="" required autofocus></div>
+                </div>
+                <div class="form-group">
+                  <label for="firstName" class="col-sm-2 col-form-label">Author First Name</label>
+                  <div class="col-sm-10"><input class="form-control" type="text" id="firstName" placeholder="Author First Name" value="" required autofocus></div>
+                </div>
+                <div class="form-group">
+                  <label for="lastName" class="col-sm-2 col-form-label">Author Last Name</label>
+                  <div class="col-sm-10"><input class="form-control" type="text" id="lastName" placeholder="Author Last Name" value="" required autofocus></div>
+                </div>
+                <div class="form-group">
+                  <label for="fileUpload" class="col-sm-2 col-form-label">File</label>
+                  <div class="col-sm-10"><input class="form-control" type="file" id="file" value="" autofocus></div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-lg btn-warning delete" type="submit">Delete File</button>
+                    <button class="btn btn-lg btn-primary" type="submit">Save Changes</button>
+                </div>
             </form>
-        </div>
+            </div>
         </div>
     </div>
 

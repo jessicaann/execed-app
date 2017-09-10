@@ -174,10 +174,16 @@ $(".delete").click(function(event) {
             "content-type": "application/json"
         },
       method: "DELETE",
+      error: function(response){
+        console.log("Cannot delete item", response);
+        var transElement = 
+          `<div class="negative-msg-display">Cannot delete item</div>`;
+          $(".editSession").html(transElement);
+      },
       success: function(response){
           console.log("Item removed", response);
           var transElement = 
-            `<div class="itemdeleted">Session removed</div>`;
+            `<div class="positive-msg-display">Session deleted</div>`;
             $(".editSession").html(transElement);
       }
     }

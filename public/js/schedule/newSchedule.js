@@ -157,7 +157,9 @@ $(".newSessionForm").submit(function(event) {
             $('.newSession').addClass('hidden');
         },
       success: function(res){var transElement = 
-            `<div class="positive-msg-display">Session created</div>`;
+            `<div class="positive-msg-display">Session created</div>
+            <p class="italicize">After successfully creating the session, add it to your new schedule by selecting it in the above "Create New Schedule."
+            `;
             $(".session-msg-display").html(transElement);
             $('.newSession').addClass('hidden');
             var newSession = `<option value="${res.id}">${res.title}</option>`;

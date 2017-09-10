@@ -24,14 +24,12 @@
           </button>
           <a class="navbar-brand username" href="#">Welcome, <span>NAME</span></a>
         </div>
-        <!--<div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Settings</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
+        <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="logout"><a href="../logout.html">Log Out</a></li>
+                </ul>
         </div>
+      </div>
     </nav>
 </div>
    
@@ -68,7 +66,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Edit/Remove Admin</h1>
           <div class="editAdmin">
-              <form method="post" action="/users/profile" class="editUserForm form-horizontal">
+              <form method="post" action="/admins/profile" class="editAdminForm form-horizontal">
                 <div class="form-group">
                     <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">

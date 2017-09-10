@@ -20,11 +20,15 @@ $(getUsers(displayUsers));
 
 function displayUsers(response){
     const {email, firstName, lastName, schedules} = response;
-    console.log(response.schedules);
+    var scheduleTitles = [];
+    schedules.forEach(function(schedule){
+        scheduleTitles.push(schedule.title);
+    });
     $('#firstName').val(firstName);
     $('#email').val(email);
     $('#lastName').val(lastName);
-    $('#currentSchedule').val(schedules.title);
+
+    getSchedules(displaySchedules, schedules);
 }
 
 $(".editUserForm").submit(function(event) {
@@ -34,22 +38,17 @@ $(".editUserForm").submit(function(event) {
     const lastName = $(".editUserForm #lastName").val();
     const email = $(".editUserForm #email").val();
     const password = $(".editUserForm #password").val();
-    console.log($(".editUserForm #schedules").val());
-    /*const schedules = function() {
-        if($(".editUserForm #schedules").val() !== "") { return $(".editUserForm #schedules").val();
-    } else{
-       return $(".editUserForm #currentSchedule").val();
-    } 
-};*/
-//can I set this to the current schedule if there is not value in this one?
+    const schedules = $(".editUserForm #schedules").val();
+
     
     var getUserSettings = {
-      url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),
+      url: BASE_URL + "/users/" + localStorage.getItem('editUserId'),
       data: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
+        schedules: schedules,
         id: localStorage.getItem('editUserId')
       }),
       dataType: "json",
@@ -57,29 +56,81 @@ $(".editUserForm").submit(function(event) {
             "content-type": "application/json"
         },
       method: "PUT",
+      error: function(response){
+        var transElement = 
+        `<div class="negative-msg-display">Unable to update user</div>`;
+        $(".msg-display").html(transElement);},
       success: function(response){
-          console.log("It's a miracle:", response);
-      }
+        var transElement = 
+        `<div class="positive-msg-display">User updated</div>`;
+        $(".msg-display").html(transElement);}
     }
     $.ajax(getUserSettings);
 })
+
+function getSchedules(successCallback, scheduleTitles) {
+    var getScheduleSettings = {
+      url: BASE_URL + "/schedules",
+      data: JSON.stringify({}),
+      dataType: "json",
+        headers: {
+            "content-type": "application/json"
+        },
+      method: "GET",
+      success: function(res){
+          console.log(res);
+          successCallback(res, scheduleTitles);
+      }
+    }
+    $.ajax(getScheduleSettings);
+  }
+// Display Schedules
+function displaySchedules (response, scheduleTitles) {
+    var transElement = '';
+    if(response.schedules) {
+        response.schedules.forEach(function(schedule) {
+            let isSelected = false;
+            scheduleTitles.forEach(function(_schedule){
+                if(schedule.id === _schedule.id){
+                   isSelected = true;
+                }
+            })
+            if(isSelected){
+                transElement += `<option selected value="${schedule.id}">${schedule.title}</option>`;
+            }else{
+                transElement += `<option value="${schedule.id}">${schedule.title}</option>`;
+            }
+        })
+    }
+    $('#schedules').html(transElement);
+}
+
 //delete call
 $(".delete").click(function(event) {
     event.preventDefault();
- 
+    var deleteConfirm = confirm('Delete this item?');
+    if (!deleteConfirm) {
+        return
+    }
     var getUserSettings = {
-      url: BASE_URL + "/users/profile/" + localStorage.getItem('editUserId'),
+      url: BASE_URL + "/users/" + localStorage.getItem('editUserId'),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
             "content-type": "application/json"
         },
       method: "DELETE",
+      error: function(response){
+        console.log("Cannot delete item", response);
+        var transElement = 
+          `<div class="negative-msg-display">Cannot delete item</div>`;
+          $(".msg-display").html(transElement);
+      },
       success: function(response){
           console.log("Item removed", response);
           var transElement = 
-            `<div class="itemdeleted">User removed</div>`;
-            $(".editUser").html(transElement);
+            `<div class="itemdeleted">User deleted</div>`;
+            $(".msg-display").html(transElement);
       }
     }
     $.ajax(getUserSettings);

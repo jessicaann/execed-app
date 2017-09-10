@@ -30,3 +30,9 @@ tr.js-edit:hover {
 .detailBtn {
     position: relative;
 }
+.newSessionBtn {
+    margin: 10px 0 20px 0;
+}
+.italicize {
+    font-style: italic;
+}
