@@ -81,24 +81,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// db.users.find({"_id":ObjectId( "597e53f763f56e2c34cbed45")},{schedules:1})
-//Get all schedules associated with a user
-router.get('/:id/schedules', (req, res) => {
-   UserModel
-        .find({"_id": mongoose.Types.ObjectId(req.params.id)}, {schedules: 1})
-        .populate('schedules')
-        .exec()
-        .then(users => {
-            res.json({
-                users: users.map(
-                (user) => user.apiRepr())
-            });
-   })
-        .catch(err => {
-        console.error(err);
-            res.status(500).json({message: 'Internal server error'})
-    });
-});
 //Create new user accounts
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['firstName', 'lastName', 'email', 'password', 'schedules'];
@@ -147,7 +129,7 @@ router.put('/:id', jsonParser, (req, res) => {
     res.status(400).json({message: message});
   }
     const toUpdate = {};
-    const updateablefields = ['firstName', 'lastName', 'email', 'password', 'courses'];
+    const updateablefields = ['firstName', 'lastName', 'email', 'password', 'schedules'];
     
     updateablefields.forEach(field => {
         if (field in req.body && req.body[field] !== "") {

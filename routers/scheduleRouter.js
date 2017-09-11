@@ -67,28 +67,7 @@ router.get('/admin/:admin', (req, res) => {
             res.status(500).json({message: 'Internal server error'})
     });
 });
-//Get schedules by Admin Reference
-router.get('/user/:user', (req, res) => {
-    ScheduleModel
-        .find({"user": mongoose.Types.ObjectId(req.params.user)})
-        .populate({
-            path:"sessions",
-            populate: {
-                path: 'instructors preWork',
-            }
-        })
-        .exec()
-        .then(schedules => {
-            res.json({
-                schedules: schedules.map(
-                (schedule) => schedule.apiRepr())
-            });
-    })
-        .catch(err => {
-        console.error(err);
-            res.status(500).json({message: 'Internal server error'})
-    });
-});
+
 //Create new schedules
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['title','sessions', 'admin'];

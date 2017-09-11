@@ -36,3 +36,7 @@ tr.js-edit:hover {
 .italicize {
     font-style: italic;
 }
+
+.detail ul {
+    list-style: none;
+}

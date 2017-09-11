@@ -1,7 +1,7 @@
 //Get Schedules for User
 function getSchedules(successCallback) {
     var getScheduleSettings = {
-      url: BASE_URL + "/schedules/user/" + localStorage.getItem("userId"),
+      url: BASE_URL + "/users/" + localStorage.getItem("userId"),
       data: JSON.stringify({}),
       dataType: "json",
         headers: {
@@ -22,7 +22,7 @@ function getSchedules(successCallback) {
       var transElement = '';
     if(response.schedules) {
         response.schedules.forEach(function(schedule) {
-            transElement += `<a href="../schedule/scheduleDisplay.html?scheduleId=${schedule.id}" class="col-xs-6 col-sm-3 placeholder js-edit">
+            transElement += `<a href="scheduleDisplay.html?scheduleId=${schedule.id}" class="col-xs-6 col-sm-3 placeholder js-edit">
                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                 <h4>${schedule.title}</h4>
                 <span class="text-muted">${schedule.dates}</span>
@@ -46,5 +46,4 @@ function watchDashboardPageLoad() {
     displayName();
     getSchedules(displaySchedules);
 }
-
 $(watchDashboardPageLoad);
