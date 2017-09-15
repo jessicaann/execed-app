@@ -95,6 +95,9 @@ body {
   border-bottom-color: #fff;
 }
 
+.vertical-divider {
+  display: none;
+}
 @media (min-width: 768px) {
   .masthead-brand {
     float: left;
@@ -102,15 +105,31 @@ body {
   .masthead-nav {
     float: right;
   }
+  .role-detail {
+    width: 48.57142857%;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+  }
+  .vertical-divider {
+    display: inline-block;
+    height: 300px;
+    width: 2px;
+    background-color: #eeeeef;
+    vertical-align: top;
+    margin-top: 60px;
+    position: relative;
+  }
 }
 
-
+  
 /*
  * Cover
  */
 
 .cover {
   padding: 0 20px;
+  display: inline-block
 }
 .cover .btn-lg {
   padding: 10px 20px;

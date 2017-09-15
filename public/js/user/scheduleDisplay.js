@@ -20,14 +20,15 @@ function getSchedules(successCallback) {
       $(".scheduleTitle").text(`${response.title}`);
       $(".scheduleDates").text(`${response.dates}`);
       var sessionsElements = '';
-      var instructorNames = [];
-      var preWorkTitles = [];
+      
     if(response.sessions) {
         var scheduleSessions = response.sessions;
         var sortingTest = scheduleSessions.sort(function(a, b){
             return new Date(a.startTime) - new Date(b.startTime);
         });
         scheduleSessions.forEach(function(session) {
+            var instructorNames = [];
+            var preWorkTitles = [];
             let startTime = new Date(session.startTime);
             let endTime = new Date(session.endTime);
             const startMinutes = function() {
@@ -63,7 +64,7 @@ function getSchedules(successCallback) {
                 <div class="detail">
                     <ul>
                         <li><a href="sessionDisplay.html?sessionId=${session.id}" class="detailBtn btn btn-info btn-sm">Session Details</a></li>
-                        <li><div class="detailBtn btn btn-secondary btn-sm">Prework Status</div></li>
+                        <!-- <li><div class="detailBtn btn btn-secondary btn-sm">Prework Status</div></li> -->
                     </ul>                  
                 </div>
                 <p>Title: ${session.title}</p>

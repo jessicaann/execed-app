@@ -20,14 +20,15 @@ function getSchedules(successCallback) {
       $(".scheduleTitle").text(`${response.title}`);
       $(".scheduleDates").text(`${response.dates}`);
       var sessionsElements = '';
-      var instructorNames = [];
-      var preWorkTitles = [];
+      
     if(response.sessions) {
         var scheduleSessions = response.sessions;
         var sortingTest = scheduleSessions.sort(function(a, b){
             return new Date(a.startTime) - new Date(b.startTime);
         });
         scheduleSessions.forEach(function(session) {
+            var instructorNames = [];
+            var preWorkTitles = [];
             let startTime = new Date(session.startTime);
             let endTime = new Date(session.endTime);
             const startMinutes = function() {

@@ -59,7 +59,7 @@ function getSession(successCallback) {
             sessionsElements += `
                 <div class="sessionItem">
                     <div class="detail">
-                        <div class="detailBtn btn btn-secondary btn-sm">Prework Status</div></li>                 
+                        <!-- <div class="detailBtn btn btn-secondary btn-sm">Prework Status</div></li> -->                
                  </div>
                     <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                     <p>Date: ${months[startTime.getMonth()]} ${startTime.getDate()}, ${startTime.getFullYear()}                

@@ -5,4 +5,7 @@ $(".nav a").each(function(index, item){
     } 
 });
 
-//if(!localStorage.getItem('adminId')) location.href= BASE_URL+'/index.html';
+
+if(location.pathname !== "/admin/signin.html" && location.pathname !== "/user/signin.html") {
+    if(!localStorage.getItem('adminId') && !localStorage.getItem('userId')) location.href= BASE_URL+'/index.html';
+}

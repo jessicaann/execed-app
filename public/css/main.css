@@ -40,3 +40,6 @@ tr.js-edit:hover {
 .detail ul {
     list-style: none;
 }
+.alignlist {
+    text-align: left;
+}
