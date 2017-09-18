@@ -43,3 +43,7 @@ tr.js-edit:hover {
 .alignlist {
     text-align: left;
 }
+.borderright {
+border-right: 2px white solid;
+padding-right: 20px;
+}

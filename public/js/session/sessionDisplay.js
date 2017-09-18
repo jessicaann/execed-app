@@ -21,6 +21,7 @@ function getSession(successCallback) {
       var sessionsElements = '';
       var instructorNames = [];
       var preWorkTitles = [];
+      var preWorkLinks = [];      
     if(response) {
         let startTime = new Date(response.startTime);
         let endTime = new Date(response.endTime);
@@ -51,14 +52,15 @@ function getSession(successCallback) {
             })
             response.preWork.forEach(function(preWork){
                 preWorkTitles.push(preWork.title);
+                preWorkLinks.push('<a href="' + BASE_URL + '/uploads/'+ preWork.file + '" download>' + preWork.title + '</a>')                
             })
             sessionsElements += `
                 <div class="sessionItem">
                 <p>Title: ${response.title}</p>
                 <p>Time: ${startTime.getHours()}:${startMinutes()} - ${endTime.getHours()}:${endMinutes()}</p>
                 <p>Instructor: ${instructorNames.join(', ')}</p>
-                <p>Prework: ${preWorkTitles.join(', ')}</p>
-            </div>`;
+                <p>Prework: ${preWorkLinks.join(', ')}</p>
+                </div>`;
         $('.editBtn').attr('href', `session_edit_remove.html?sessionId=${response.id}`);
         }
     $(".sessionDisplay").html(sessionsElements);
