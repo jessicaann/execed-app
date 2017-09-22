@@ -1,6 +1,0 @@
-{"_id":{"$oid":"597e7e3d2b559d06bf957abf"},"firstName":"Frenchy","lastName":"Berdard","email":"fb@gmail.com"}
-{"_id":{"$oid":"597e7e462b559d06bf957ac0"},"firstName":"Leo","lastName":"Berdard","email":"LB@ad.com"}
-{"_id":{"$oid":"59927579867d8d1b2d9a8a53"},"firstName":"Yuri","lastName":"Kutyshenko","email":"yuri@oolong.com","__v":0}
-{"_id":{"$oid":"59927922cb34531b53fd4a3d"},"firstName":"Richard","lastName":"Etten","email":"re@oolong.com","__v":0}
-{"_id":{"$oid":"59bb41aea7d7b189f81ad6e8"},"firstName":"Fake","lastName":"Instructor1","email":"fake1@test.com","__v":0}
-{"_id":{"$oid":"59bb41bca7d7b189f81ad6e9"},"firstName":"Fake","lastName":"Instructor2","email":"fake2@test.com","__v":0}

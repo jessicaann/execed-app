@@ -1,4 +1,0 @@
-{"_id":{"$oid":"599a03e5a0c1be2e38c5422d"},"firstName":"Sarah","lastName":"Strub","email":"sarah@gmail.com","password":"1234","schedules":[{"$oid":"59970a8cbbec1929fb608087"}],"__v":0}
-{"_id":{"$oid":"59ad98a66423b742edaf048f"},"firstName":"Fred","lastName":"Flintstone","email":"fred@gmail.com","password":"1234","schedules":[{"$oid":"59b59414ec0d026aa08c6f5e"}],"__v":0}
-{"_id":{"$oid":"59ad98b06423b742edaf0490"},"firstName":"Fred","lastName":"Flintstone","email":"fr@gmail.com","password":"1234","schedules":[{"$oid":"59970a8cbbec1929fb608087"}],"__v":0}
-{"_id":{"$oid":"59bb411ba7d7b189f81ad6e6"},"firstName":"Test","lastName":"User","email":"testuser@test.com","password":"11234","schedules":[],"__v":0}
