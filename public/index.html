@@ -1,138 +1,156 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Executive Education App</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link href="/css/main.css" rel="stylesheet">
+  <title>Executive Education App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link href="/css/main.css" rel="stylesheet">
   <link href="/css/cover.css" rel="stylesheet">
 </head>
+
 <body>
-<!-- Cover Page -->
-<div class="site-wrapper">
+  <!-- Cover Page -->
+  <div class="site-wrapper">
 
-      <div class="site-wrapper-inner">
+    <div class="site-wrapper-inner">
 
-        <div class="cover-container">
+      <div class="cover-container">
 
-          <div class="masthead clearfix">
-                  <nav class="navbar navbar-inverse navbar-fixed-top">
-                      <a class="navbar-brand" href="#">ExecEd App</a>
-                
-                      <div id="navbar" class="navbar-collapse collapse">
-                          <ul class="nav navbar-nav navbar-right">
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                              <a class="dropdown-item" href="/admin/signin.html">Admin</a>
-                              <a class="dropdown-item" href="/user/signin.html">Participant</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
+        <div class="masthead clearfix">
+          <nav class="navbar navbar-inverse navbar-fixed-top">
+            <a class="navbar-brand" href="#">ExecEd App</a>
+
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Login</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="/admin/signin.html">Admin</a>
+                    <a class="dropdown-item" href="/user/signin.html">Participant</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <main role="main">
+
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          <div class="jumbotron">
+            <div class="container">
+              <h1 class="display-3">Executive Education - made easy.</h1>
+              <p>With Exec-Ed App, creating and delivering the materials necessary for a program is easy. And even better, administrators
+                can provide participants with access to a beautiful, easy to use portal to access those materials.</p>
+            </div>
           </div>
-          <main role="main">
 
-              <!-- Main jumbotron for a primary marketing message or call to action -->
-              <div class="jumbotron">
-                <div class="container">
-                  <h1 class="display-3">Executive Education - made easy.</h1>
-                  <p>With Exec-Ed App, creating and delivering the materials necessary for a program is easy. And even better, administrators can provide participants with access to a beautiful, easy to use portal to access those materials.</p>
+          <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+              <div class="col-md-4">
+                <h2>Administrators</h2>
+                <p>In Executive Education App, you can create, edit, and delete all of the components of a successful program
+                  schedule and give participants access to their schedule and relevant prework materials all in one easy-to-access
+                  place. </p>
+                <p>
+                  <a class="btn btn-secondary" href="#" role="button" data-toggle="modal" data-target="#adminModal">View details »</a>
+                </p>
+
+                <!-- Modal -->
+                <div id="adminModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">As an Admin, you can...</h4>
+                      </div>
+                      <div class="modal-body">
+                        <ul class="alignlist">
+                          <li> 1. Create your teammates, instructors, and prework as necessary. </li>
+                          <li> 2. Create a new schedule. </li>
+                          <li> 3. Add new sessions to that schedule. </li>
+                          <li> 4. Create your users, assign them schedules and marvel at their success! </li>
+                        </ul>
+                        <a href="/admin/signin.html" class="btn btn-lg btn-default">Login as Administrator</a>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-        
-              <div class="container">
-                <!-- Example row of columns -->
-                <div class="row">
-                  <div class="col-md-4">
-                    <h2>Administrators</h2>
-                    <p>In Executive Education App, you can create, edit, and delete all of the components of a successful program schedule and give participants access to their schedule and relevant prework materials all in one easy-to-access place. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button" data-toggle="modal" data-target="#adminModal">View details »</a></p>
+              <div class="col-md-4">
+                <h2>Participants</h2>
+                <p>See your program schedule and download your prework. It's as simple as that. </p>
+                <p>
+                  <a class="btn btn-secondary" href="#" role="button" data-toggle="modal" data-target="#paxModal">View details »</a>
+                </p>
+                <!-- Modal -->
+                <div id="paxModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">As a Participant, you can...</h4>
+                      </div>
+                      <div class="modal-body">
+                        <ul class="alignlist">
+                          <li> 1. Find your schedule. </li>
+                          <li> 2. Check out it's sessions. </li>
+                          <li> 3. Download your prework. </li>
+                          <li> 4. Read to your heart's content. </li>
+                        </ul>
+                        <a href="/user/signin.html" class="btn btn-lg btn-default">Login as Participant</a>
 
-<!-- Modal -->
-<div id="adminModal" class="modal fade" role="dialog">
-  <div class="modal-dialog"> 
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">As an Admin, you can...</h4>
-      </div>
-      <div class="modal-body">
-          <ul class="alignlist">
-              <li> 1. Create your teammates, instructors, and prework as necessary.  </li>
-              <li> 2. Create a new schedule. </li>
-              <li> 3. Add new sessions to that schedule. </li>
-              <li> 4. Create your users, assign them schedules and marvel at their success! </li>
-            </ul>
-            <a href="/admin/signin.html" class="btn btn-lg btn-default">Login as Administrator</a>                
-      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-                  </div>
-                  <div class="col-md-4">
-                    <h2>Participants</h2>
-                    <p>See your program schedule and download your prework. It's as simple as that. </p>
-                      <p><a class="btn btn-secondary" href="#" role="button" data-toggle="modal" data-target="#paxModal">View details »</a></p>
-                      <!-- Modal -->
-<div id="paxModal" class="modal fade" role="dialog">
-    <div class="modal-dialog"> 
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">As a Participant, you can...</h4>
-        </div>
-        <div class="modal-body">
-            <ul class="alignlist">
-                <li> 1. Find your schedule. </li>
-                <li> 2. Check out it's sessions. </li>
-                <li> 3. Download your prework. </li>
-                <li> 4. Read to your heart's content. </li>
-              </ul>
-              <a href="/user/signin.html" class="btn btn-lg btn-default">Login as Participant</a>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-  
-    </div>
-  </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
                     </div>
-                  <div class="col-md-4">
-                    <h2>Universities</h2>
-                    <p>A tool like Exec-Ed App can be used my universities to transform both employee and participant experiences with one of the most challenging issues facing executive education.</p>
+
                   </div>
                 </div>
-        
-                <hr>
-        
-              </div> <!-- /container -->
-        
-            </main>
-          <footer class="container">
-              <p>Executive Education Product of<a href="http://thunderbird.asu.edu"> Thunderbird School of Global Management</a>. </p>
-          </footer>
+              </div>
+              <div class="col-md-4">
+                <h2>Universities</h2>
+                <p>A tool like Exec-Ed App can be used my universities to transform both employee and participant experiences
+                  with one of the most challenging issues facing executive education.</p>
+              </div>
+            </div>
+
+            <hr>
+
           </div>
-        </div>
+          <!-- /container -->
+
+        </main>
+        <footer class="container">
+          <p>Executive Education Product of
+            <a href="http://thunderbird.asu.edu"> Thunderbird School of Global Management</a>. </p>
+        </footer>
       </div>
-
     </div>
+  </div>
 
-	<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
