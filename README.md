@@ -14,7 +14,7 @@ Additionally, administrators have the ability to create and manage admin and par
 
 [Quiz](https://gyazo.com/63d9860410364cb0de944a01be80e1b2)
 
-##Check It Out
+## Check It Out
 Should you decide to explore the Admin role, use the login:
 username:testadmin@test.com
 password:1234
