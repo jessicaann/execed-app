@@ -1,4 +1,4 @@
-[![catlogo5](https://cloud.githubusercontent.com/assets/25944411/26743052/54b724d2-47ae-11e7-9e1e-b0e6268aadfe.png)](https://lit-savannah-21161.herokuapp.com/)
+[![catlogo5](eealogo.png)](https://lit-savannah-21161.herokuapp.com/)
 ## Why ExecEd-App
 As an operations manager in executive education, few things are more challenging than sourcing case studies, articles, books and more from faculty and attaining copyright for these items. Once that difficult step has been completed, an operations manager must deliver these materials to program participants who are generally unfamiliar with most learning portals and struggle to download and keep track of their materials. Exec-Ed App strives to eliminate these issues for both the organizers and participants of executive education programs. With this app, administrators can source from a database of uploaded and copyright-paid materials, and seemlessly deliver this to their participants.
 
