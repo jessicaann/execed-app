@@ -24,4 +24,4 @@ adminSchema.virtual('fullName').get(function() {
 });
 
 const AdminModel = mongoose.model('Admin', adminSchema);
-module.exports={AdminModel};
+module.exports= {AdminModel};
