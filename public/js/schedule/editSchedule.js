@@ -37,7 +37,7 @@ $('.editScheduleForm').submit((event) => {
   const title = $('.editScheduleForm #title').val().trim();
   const dates = $('.editScheduleForm #dates').val();
   const sessions = $('.editScheduleForm #sessions').val();
-  console.log(dates);
+
   const getScheduleSettings = {
     url: `${BASE_URL }/schedules/${localStorage.getItem('editScheduleId')}`,
     data: JSON.stringify({
