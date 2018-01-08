@@ -188,7 +188,7 @@ $('.delete').click((event) => {
       let transElement =
             '<div class="positive-msg-display">Session deleted</div>';
       $('.editSession').html(transElement);
-      location.href = `${BASE_URL}/schedules/${localStorage.getItem('editScheduleId')}`
+      location.href = `${BASE_URL}/schedules/scheduleDisplay.html?scheduleId=${localStorage.getItem('editScheduleId')}`
     },
   };
   $.ajax(getSessionSettings);
