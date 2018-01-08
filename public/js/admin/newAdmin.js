@@ -22,6 +22,7 @@ $('.newAdminForm').submit((event) => {
       const transElement =
             '<div class="positive-msg-display">Admin created</div>';
       $('.msg-display').html(transElement);
+      location.href='./admins.html';
     },
   };
   $.ajax(getLoginSettings);

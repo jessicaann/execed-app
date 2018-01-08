@@ -136,6 +136,7 @@ $('.delete').click((event) => {
       let transElement =
             '<div class="itemdeleted">User deleted</div>';
       $('.msg-display').html(transElement);
+      location.href='./users.html'
     },
   };
   $.ajax(getUserSettings);

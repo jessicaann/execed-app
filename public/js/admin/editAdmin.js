@@ -60,7 +60,7 @@ $('.delete').click((event) => {
   event.preventDefault();
 
   const getAdminSettings = {
-    url: `${BASE_URL}/admins/profile/${localStorage.getItem('editId')}`,
+    url: `${BASE_URL}/admins/${localStorage.getItem('editId')}`,
     data: JSON.stringify({}),
     dataType: 'json',
     headers: {
@@ -72,6 +72,7 @@ $('.delete').click((event) => {
       const transElement =
             '<div class="itemdeleted">Admin deleted</div>';
       $('.editAdmin').html(transElement);
+      location.href='./aminss.html';
     },
   };
   $.ajax(getAdminSettings);
