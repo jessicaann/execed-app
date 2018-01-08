@@ -83,7 +83,7 @@ $('.editSessionForm').submit((event) => {
       let transElement =
         '<div class="positive-msg-display">Session updated</div>';
       $('.msg-display').html(transElement);
-      location.href = `./session/sessionDisplay.html?sessionId=`${ localStorage.getItem('editSessionId')}`
+      location.href = `./session/sessionDisplay.html?sessionId=${localStorage.getItem('editSessionId')}`;
  },
   };
   $.ajax(getSessionSettings);
