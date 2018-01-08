@@ -60,6 +60,7 @@ $('.editScheduleForm').submit((event) => {
       let transElement =
         '<div class="positive-msg-display">Schedule updated</div>';
       $('.msg-display').html(transElement); 
+      location.href = `${BASE_URL}/schedules/scheduleDisplay.html?scheduleId=${localStorage.getItem('editScheduleId')}`
     },
   };
   $.ajax(getScheduleSettings);
@@ -121,6 +122,7 @@ $('.delete').click((event) => {
       let transElement =
             '<div class="itemdeleted">Schedule removed</div>';
       $('.editSchedule').html(transElement);
+      location.href = `${BASE_URL}/admin/dashboard.html`
     },
   };
   $.ajax(getScheduleSettings);
