@@ -37,7 +37,7 @@ $('.editScheduleForm').submit((event) => {
   const title = $('.editScheduleForm #title').val().trim();
   const dates = $('.editScheduleForm #dates').val();
   const sessions = $('.editScheduleForm #sessions').val();
-    console.log(dates);
+  console.log(dates);
   const getScheduleSettings = {
     url: `${BASE_URL }/schedules/${localStorage.getItem('editScheduleId')}`,
     data: JSON.stringify({
@@ -55,12 +55,12 @@ $('.editScheduleForm').submit((event) => {
       let transElement =
         '<div class="negative-msg-display">Unable to update schedule</div>';
       $('.msg-display').html(transElement);
- },
+    },
     success(response) {
       let transElement =
         '<div class="positive-msg-display">Schedule updated</div>';
       $('.msg-display').html(transElement); 
-},
+    },
   };
   $.ajax(getScheduleSettings);
 });
@@ -224,18 +224,18 @@ $('.newSessionForm').submit((event) => {
     },
     method: 'POST',
     error(res) {
- let transElement =
+      let transElement =
             '<div class="negative-msg-display">Unable to create session</div>';
-    $('.session-msg-display').html(transElement);
-    $('.newSession').addClass('hidden');
+      $('.session-msg-display').html(transElement);
+      $('.newSession').addClass('hidden');
     },
     success(res) { 
-let transElement =
+      let transElement =
             '<div class="positive-msg-display">Session created</div>';
-    $('.session-msg-display').html(transElement);
-    $('.newSession').addClass('hidden');
-    let newSession = `<option value="${res.id}">${res.title}</option>`;
-    $('#sessions').prepend(newSession);
+      $('.session-msg-display').html(transElement);
+      $('.newSession').addClass('hidden');
+      let newSession = `<option value="${res.id}">${res.title}</option>`;
+      $('#sessions').prepend(newSession);
     },
   };
   $.ajax(getScheduleSettings);
