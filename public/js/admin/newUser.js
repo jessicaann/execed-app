@@ -6,8 +6,8 @@ $('.newUserForm').submit((event) => {
   const email = $('.newUserForm #email').val();
   const password = $('.newUserForm #password').val();
   const schedules = $('.newUserForm #schedules').val();
-  let getUserSettings = {
-    url: `${BASE_URL  }/users`,
+  const getUserSettings = {
+    url: `${BASE_URL}/users`,
     data: JSON.stringify({
       firstName,
       lastName,
@@ -20,19 +20,23 @@ $('.newUserForm').submit((event) => {
       'content-type': 'application/json',
     },
     method: 'POST',
-    error(res){var transElement = 
-            `<div class="negative-msg-display">Cannot create user</div>`;
-    $(".msg-display").html(transElement);},
-    success(res){var transElement = 
-            `<div class="positive-msg-display">User created</div>`;
-    $(".msg-display").html(transElement);},
+    error(res) {
+      const transElement =
+            '<div class="negative-msg-display">Cannot create user</div>';
+      $('.msg-display').html(transElement);
+    },
+    success(res) {
+      const transElement =
+            '<div class="positive-msg-display">User created</div>';
+      $('.msg-display').html(transElement);
+    },
   };
   $.ajax(getUserSettings);
 });
 // get Schedules for the dropdown
 function getSchedules(successCallback) {
   const getScheduleSettings = {
-    url: `${BASE_URL }/schedules/admin/${localStorage.getItem('adminId')}`,
+    url: `${BASE_URL}/schedules/admin/${localStorage.getItem('adminId')}`,
     data: JSON.stringify({}),
     dataType: 'json',
     headers: {
