@@ -33,7 +33,7 @@ $('.editInstructorForm').submit((event) => {
   const email = $('.editInstructorForm #email').val();
 
   const getInstructorSettings = {
-    url: `${BASE_URL}/instructors/${localStorage.getItem('editInstrId')}`,
+    url: `${BASE_URL}/instructors/profile/${localStorage.getItem('editInstrId')}`,
     data: JSON.stringify({
       firstName,
       lastName,
@@ -66,7 +66,7 @@ $('.delete').click((event) => {
   event.preventDefault();
 
   const getInstructorSettings = {
-    url: `${BASE_URL }/instructors/${ localStorage.getItem('editInstrId')}`,
+    url: `${BASE_URL }/instructors/profile/${ localStorage.getItem('editInstrId')}`,
     data: JSON.stringify({}),
     dataType: 'json',
     headers: {
@@ -84,10 +84,10 @@ $('.delete').click((event) => {
       let transElement =
             '<div class="positive-msg-display">Instructor removed</div>';
       $('.editInstructor').html(transElement);
-      location.href='./instructors.html';
     },
   };
   $.ajax(getInstructorSettings);
+  location.href='./instructors.html';
 });
 
 function displayName() {
