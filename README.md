@@ -1,4 +1,4 @@
-[![catlogo5](eealogo.png)](https://lit-savannah-21161.herokuapp.com/)
+[![eeaLogo](eealogo.png)](https://lit-savannah-21161.herokuapp.com/)
 ## Why ExecEd-App
 As an operations manager in executive education, few things are more challenging than sourcing case studies, articles, books and more from faculty and attaining copyright for these items. Once that difficult step has been completed, an operations manager must deliver these materials to program participants who are generally unfamiliar with most learning portals and struggle to download and keep track of their materials. Exec-Ed App strives to eliminate these issues for both the organizers and participants of executive education programs. With this app, administrators can source from a database of uploaded and copyright-paid materials, and seemlessly deliver this to their participants.
 
@@ -10,9 +10,11 @@ By assigning materials to sessions (i.e. Monday's 9-11am slot is one session wit
 Additionally, administrators have the ability to create and manage admin and participant accounts and schedules, thus making it so that participant groups do not have to endure the extra step of creating accounts. 
 
 ## ScreenShots
-[HomePage](https://gyazo.com/a7bea66f5b1e3c6c6534687900eed947)
+[Landing Page](https://gyazo.com/4302ccc5489c392c9c087c62001e118d)
 
-[Quiz](https://gyazo.com/63d9860410364cb0de944a01be80e1b2)
+[Admin View](https://gyazo.com/c597c195a51f338d3e38c36a76153025)
+
+[Participant View](https://gyazo.com/8908feb09f9ede101740925d7083f906)
 
 ## Check It Out
 Should you decide to explore the Admin role, use the login:
