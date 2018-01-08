@@ -72,7 +72,7 @@ $('.delete').click((event) => {
       const transElement =
             '<div class="itemdeleted">Admin deleted</div>';
       $('.editAdmin').html(transElement);
-      location.href='./aminss.html';
+      location.href='./admins.html';
     },
   };
   $.ajax(getAdminSettings);
