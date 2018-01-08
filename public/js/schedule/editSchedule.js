@@ -60,7 +60,7 @@ $('.editScheduleForm').submit((event) => {
       let transElement =
         '<div class="positive-msg-display">Schedule updated</div>';
       $('.msg-display').html(transElement); 
-      location.href = `${BASE_URL}/schedules/scheduleDisplay.html?scheduleId=${localStorage.getItem('editScheduleId')}`
+      location.href = `./scheduleDisplay.html?scheduleId=${localStorage.getItem('editScheduleId')}`
     },
   };
   $.ajax(getScheduleSettings);
