@@ -94,9 +94,9 @@ router.post('/', jsonParser, (req, res) => {
   // make sure an account with the same email address doesn't already exist
   UserModel
     .findOne({ email: req.body.email })
-    .exec((err, found_userAccount) => {
-      if (err) { return next(err); }
-      if (found_userAccount) {
+    .exec()
+    .then((user) => {
+      if (user) {
         res.status(400).json({ message: 'An account already exists using this email address.' });
       } else {
         UserModel
@@ -108,7 +108,7 @@ router.post('/', jsonParser, (req, res) => {
             schedules: req.body.schedules,
           })
           .then((user) => {
-            res.status(201).json(user.apiRepr());
+            res.status(201).json(user);
           })
           .catch((err) => {
             console.error(err);
