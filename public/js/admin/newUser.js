@@ -29,6 +29,7 @@ $('.newUserForm').submit((event) => {
       const transElement =
             '<div class="positive-msg-display">User created</div>';
       $('.msg-display').html(transElement);
+      location.href='./users.html'
     },
   };
   $.ajax(getUserSettings);
