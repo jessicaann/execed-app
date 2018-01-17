@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
     .find()
     .exec()
     .then((schedules) => {
- console.log(schedules);
+      console.log(schedules);
       res.json({
         schedules: schedules.map(schedule => schedule.apiCreatedRepr()),
       });
     })
     .catch((err) => {
-        console.error(err);
-        res.status(500).json({ message: 'Internal server error' });
-      });
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error' });
+    });
 });
 
 // Get individual schedules
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
       },
     })
     .exec()
-    .then((schedule) => res.json(schedule.apiRepr()))
+    .then(schedule => res.json(schedule.apiRepr()))
     .catch((err) => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
 // Get schedules by Admin Reference
 router.get('/admin/:admin', (req, res) => {
   ScheduleModel
-    .find({ 'admin': mongoose.Types.ObjectId(req.params.admin) })
+    .find({ admin: mongoose.Types.ObjectId(req.params.admin) })
     .populate({
       path: 'sessions',
       populate: {
@@ -82,8 +82,8 @@ router.post('/', jsonParser, (req, res) => {
       title: req.body.title,
       dates: req.body.dates,
       sessions: req.body.sessions,
-      admin: req.body.admin 
-})
+      admin: req.body.admin,
+    })
     .then(schedule => res.status(201).json(schedule.apiCreatedRepr()))
     .catch((err) => {
       console.error(err);
